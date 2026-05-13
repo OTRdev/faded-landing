@@ -322,6 +322,17 @@
 
   /* hero tagline emphasis */
   .hero-sub em { font-style:normal; color:#F5F5F0; font-weight:500; }
+
+  /* ── APP ACCESS LINK ── */
+  .app-access-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 20px; font-size: 12px; color: #333;
+    text-decoration: none; letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .app-access-link:hover { color: var(--blue-lt); }
+  .app-access-link .arrow { color: var(--blue); font-size: 14px; transition: transform 0.2s; }
+  .app-access-link:hover .arrow { transform: translateX(3px); }
 </style>
 </head>
 <body>
@@ -329,7 +340,10 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">FAD<span>ED</span></div>
-  <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+  <div style="display:flex;align-items:center;gap:20px">
+    <a href="https://www.app.letsgetfaded.com?beta=1" style="color:#444;font-size:13px;text-decoration:none;font-weight:500;transition:color 0.2s" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#444'">Enter App →</a>
+    <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -432,7 +446,19 @@
           <a id="share-whatsapp" href="#" target="_blank" class="share-btn">💬 WhatsApp</a>
           <button onclick="copyLink()" class="share-btn" id="copy-btn">🔗 Copy Link</button>
         </div>
+        <div style="margin-top:16px">
+          <a href="https://www.app.letsgetfaded.com?beta=1" class="app-access-link">
+            Want to explore the app now? <span class="arrow">→</span>
+          </a>
+        </div>
       </div>
+    </div>
+
+    <!-- Subtle access link for barbers / invited testers -->
+    <div style="text-align:center">
+      <a href="https://www.app.letsgetfaded.com?beta=1" class="app-access-link">
+        Already have access? Enter the app <span class="arrow">→</span>
+      </a>
     </div>
 
   </div>
@@ -554,6 +580,7 @@
     <a href="#waitlist">Join Waitlist</a>
     <a href="#barbers">For Barbers</a>
     <a href="mailto:hello@letsgetfaded.com">Contact</a>
+    <a href="https://www.app.letsgetfaded.com?beta=1">Try the App</a>
   </div>
   <div class="footer-copy">© 2026 FADED · letsgetfaded.com</div>
 </footer>
