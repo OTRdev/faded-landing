@@ -259,6 +259,69 @@
     .form-row { flex-direction: column; }
     .submit-btn { width: 100%; justify-content: center; }
   }
+
+  /* ── HERO BACKGROUND FX ── */
+  .hero-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 55% at 50% 30%, rgba(37,99,235,0.22) 0%, transparent 70%);
+    animation: breathe 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes breathe { 0%,100%{opacity:.65} 50%{opacity:1} }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+    animation: gridPulse 6s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes gridPulse { 0%{opacity:.3} 100%{opacity:.9} }
+  .hero-scan {
+    position: absolute; left:0; right:0; top:0; height:2px;
+    background: linear-gradient(90deg, transparent, rgba(37,99,235,0.55), transparent);
+    animation: heroScan 7s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes heroScan { 0%{top:0;opacity:0} 5%{opacity:1} 95%{opacity:1} 100%{top:100%;opacity:0} }
+
+  /* ── CLASSIFIED TAG ── */
+  .top-tag { display:flex; align-items:center; gap:clamp(10px,3vw,16px); margin-bottom:22px; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .15s both; }
+  .tag-line { width:clamp(36px,7vw,64px); height:1px; background:linear-gradient(90deg,transparent,#2563EB); }
+  .tag-line.r { background:linear-gradient(90deg,#2563EB,transparent); }
+  .tag-text { font-size:clamp(9px,2vw,11px); font-weight:500; color:#2563EB; letter-spacing:.38em; text-transform:uppercase; }
+
+  /* ── SCISSORS ── */
+  .scissors-wrap { margin-bottom:12px; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .3s both; }
+  .scissors-wrap svg { width:clamp(30px,7vw,42px); height:clamp(30px,7vw,42px); opacity:.35; }
+
+  /* ── REDACTED BARS ── */
+  .redacted { display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:22px; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .55s both; }
+  .r-label { font-size:9px; font-weight:500; letter-spacing:.4em; color:#2563EB; text-transform:uppercase; margin-bottom:2px; }
+  .r-row { display:flex; align-items:center; gap:10px; }
+  .r-bar { height:11px; background:rgba(37,99,235,.1); border:1px solid rgba(37,99,235,.18); border-radius:2px; }
+  .r-dot-sm { width:5px; height:5px; border-radius:50%; background:#2563EB; opacity:.5; animation:rblink 2s ease-in-out infinite; flex-shrink:0; }
+  @keyframes rblink { 0%,100%{opacity:.5} 50%{opacity:1} }
+
+  /* ── ANGULAR COUNTDOWN BOXES ── */
+  .countdown-wrap { margin-bottom:14px; }
+  .c-box {
+    width:clamp(68px,17vw,104px); height:clamp(68px,17vw,104px);
+    border:1px solid rgba(37,99,235,.24); background:rgba(37,99,235,.04);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; border-radius:0;
+  }
+  .c-box::before { content:''; position:absolute; top:0; left:0; width:10px; height:10px; border-top:1.5px solid rgba(37,99,235,.65); border-left:1.5px solid rgba(37,99,235,.65); }
+  .c-box::after  { content:''; position:absolute; bottom:0; right:0; width:10px; height:10px; border-bottom:1.5px solid rgba(37,99,235,.65); border-right:1.5px solid rgba(37,99,235,.65); }
+  .c-top { position:absolute; top:0; left:0; right:0; height:2px; background:#2563EB; opacity:.45; }
+
+  /* ── HERO STATUS ── */
+  .hero-status { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .s-dot-live { width:6px; height:6px; border-radius:50%; background:#2563EB; box-shadow:0 0 8px #2563EB; animation:rblink 2s ease-in-out infinite; flex-shrink:0; }
+  .s-text-live { font-size:10px; color:rgba(245,245,240,.28); letter-spacing:.28em; text-transform:uppercase; }
+
+  /* hero tagline emphasis */
+  .hero-sub em { font-style:normal; color:#F5F5F0; font-weight:500; }
 </style>
 </head>
 <body>
@@ -271,24 +334,62 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="launch-badge">
-    <span>🚀 LAUNCHING JUNE 2026</span>
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-scan"></div>
+
+  <div class="top-tag">
+    <div class="tag-line"></div>
+    <span class="tag-text">Classified</span>
+    <div class="tag-line r"></div>
+  </div>
+
+  <div class="scissors-wrap">
+    <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="14" r="9" stroke="#2563EB" stroke-width="1.8" fill="none"/>
+      <circle cx="14" cy="42" r="9" stroke="#2563EB" stroke-width="1.8" fill="none"/>
+      <line x1="21" y1="19" x2="54" y2="52" stroke="#2563EB" stroke-width="1.8"/>
+      <line x1="21" y1="37" x2="54" y2="4" stroke="#2563EB" stroke-width="1.8"/>
+      <circle cx="14" cy="14" r="4" fill="#2563EB" opacity="0.4"/>
+      <circle cx="14" cy="42" r="4" fill="#2563EB" opacity="0.4"/>
+    </svg>
   </div>
 
   <h1 class="hero-title">GET<br><span class="blue">FAD</span>ED.</h1>
 
-  <p class="hero-sub">Find an available barber near you right now. Book instantly. No calls, no DMs, no waiting.</p>
+  <p class="hero-sub">Something is <em>changing</em> the way you find your barber.</p>
   <p class="hero-detail">TORONTO · MISSISSAUGA · HAMILTON · AND EVERYWHERE ELSE</p>
+
+  <!-- Redacted -->
+  <div class="redacted">
+    <div class="r-label">Details — Classified</div>
+    <div class="r-row">
+      <div class="r-dot-sm"></div>
+      <div class="r-bar" style="width:clamp(90px,24vw,160px)"></div>
+      <div class="r-dot-sm"></div>
+    </div>
+    <div class="r-row">
+      <div class="r-bar" style="width:clamp(55px,14vw,90px)"></div>
+      <div class="r-dot-sm"></div>
+      <div class="r-bar" style="width:clamp(70px,20vw,130px)"></div>
+    </div>
+  </div>
 
   <!-- Countdown -->
   <div class="countdown-wrap" id="countdown">
-    <div class="cd-block"><div class="cd-num" id="cd-days">00</div><div class="cd-label">DAYS</div></div>
+    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-days">00</div><div class="cd-label">DAYS</div></div>
     <div class="cd-sep">:</div>
-    <div class="cd-block"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">HOURS</div></div>
+    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-hours">00</div><div class="cd-label">HOURS</div></div>
     <div class="cd-sep">:</div>
-    <div class="cd-block"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">MINUTES</div></div>
+    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-mins">00</div><div class="cd-label">MINS</div></div>
     <div class="cd-sep">:</div>
-    <div class="cd-block"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">SECONDS</div></div>
+    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-secs">00</div><div class="cd-label">SECS</div></div>
+  </div>
+
+  <!-- Status line -->
+  <div class="hero-status">
+    <div class="s-dot-live"></div>
+    <span class="s-text-live">Something is live — you just don't know it yet</span>
   </div>
 
   <!-- Waitlist form -->
