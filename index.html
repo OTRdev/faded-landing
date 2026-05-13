@@ -26,8 +26,8 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; max-width: 100%; width: 100%; }
 
   /* ── NAV ── */
   nav {
@@ -252,6 +252,48 @@
   .footer-links a:hover { color: var(--white); }
   .footer-copy { color: #666; font-size: 12px; }
 
+  /* ── FOUNDING BARBERS ── */
+  .founding-banner {
+    background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(245,158,11,0.03));
+    border: 1px solid rgba(245,158,11,0.22); border-radius: 20px;
+    padding: 40px 32px; text-align: center; margin-bottom: 48px; position: relative; overflow: hidden;
+  }
+  .founding-banner::before {
+    content: ''; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .founding-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3);
+    padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+    font-size: 11px; font-weight: 700; color: #F59E0B; letter-spacing: 2px; text-transform: uppercase;
+  }
+  .founding-badge .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #F59E0B; animation: rblink 1.5s ease-in-out infinite; }
+  .founding-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 9vw, 60px);
+    letter-spacing: 4px; color: #F5F5F0; line-height: 1; margin-bottom: 16px;
+  }
+  .founding-title span { color: #F59E0B; }
+  .founding-sub { font-size: 15px; color: #9CA3AF; line-height: 1.75; max-width: 460px; margin: 0 auto 28px; }
+  .founding-sub strong { color: #FCD34D; }
+  .founding-counter { margin-bottom: 28px; }
+  .founding-spots { font-size: 13px; color: #777; margin-bottom: 10px; }
+  .founding-spots em { font-style: normal; color: #F59E0B; font-weight: 800; font-size: 20px; }
+  .founding-bar { max-width: 280px; height: 5px; background: rgba(245,158,11,0.1); border-radius: 3px; margin: 0 auto; overflow: hidden; }
+  .founding-bar-fill { height: 100%; background: linear-gradient(90deg, #F59E0B, #FCD34D); border-radius: 3px; transition: width 1.2s ease; }
+  .founding-cta {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 4px;
+    padding: 16px 36px; background: linear-gradient(135deg, #F59E0B, #D97706);
+    border: none; border-radius: 14px; color: #0A0A0A;
+    font-size: 15px; font-weight: 800; cursor: pointer; text-decoration: none;
+    font-family: 'Syne', sans-serif; letter-spacing: 0.3px;
+    box-shadow: 0 8px 28px rgba(245,158,11,0.35); transition: all 0.2s;
+  }
+  .founding-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(245,158,11,0.45); color: #0A0A0A; }
+  .founding-note { font-size: 12px; color: #555; margin-top: 14px; }
+
   /* ── MOBILE ── */
   @media(max-width: 768px) {
     nav { padding: 14px 20px; }
@@ -267,12 +309,18 @@
 
   @media(max-width: 520px) {
     /* Hero */
-    .hero { padding: 90px 20px 48px; }
-    .hero-detail { font-size: 9px; letter-spacing: 1px; white-space: normal; text-align: center; }
+    .hero { padding: 90px 20px 48px; width: 100%; }
+    .hero-title { letter-spacing: 3px; }
+    .hero-detail { font-size: 9px; letter-spacing: 0.5px; white-space: normal; text-align: center; overflow: hidden; }
     .hero-sub { font-size: clamp(15px, 4vw, 18px); text-align: center; }
     .top-tag { justify-content: center; }
     .hero-status { justify-content: center; }
     .s-text-live { font-size: 9px; letter-spacing: .18em; text-align: center; }
+    .section-title { letter-spacing: 2px; }
+    .founding-banner { padding: 28px 20px; }
+    .founding-title { letter-spacing: 2px; }
+    .founding-cta { padding: 14px 24px; font-size: 14px; width: 100%; justify-content: center; }
+    .founding-sub { font-size: 14px; }
 
     /* Countdown — fit all 4 boxes on one row */
     .countdown-wrap { gap: 4px; margin-bottom: 28px; flex-wrap: nowrap; justify-content: center; width: 100%; padding: 0 4px; }
@@ -617,6 +665,22 @@
     <div class="fade-divider"></div>
     <h2 class="section-title" style="margin-bottom:16px">YOUR CHAIR.<br>YOUR RULES.</h2>
     <p style="text-align:center;color:#4B7AC7;font-size:16px;max-width:480px;margin:0 auto 48px;line-height:1.7">Go live when you're ready. Get booked instantly. Keep every dollar — FADED takes zero commission.</p>
+
+    <!-- Founding Barbers Offer -->
+    <div class="founding-banner">
+      <div class="founding-badge"><div class="badge-dot"></div> Founding Barbers — Limited Spots</div>
+      <h3 class="founding-title">2 MONTHS.<br><span>ON US.</span></h3>
+      <p class="founding-sub">Be one of the <strong>first 10 barbers</strong> to join FADED and get your first 2 months completely free — no credit card, no contract. Show up at launch already ahead of the competition. Your clients book you. You keep everything.</p>
+      <div class="founding-counter">
+        <p class="founding-spots"><em id="barber-spots-taken">—</em> of 10 founding spots claimed</p>
+        <div class="founding-bar"><div class="founding-bar-fill" id="founding-bar-fill" style="width:0%"></div></div>
+      </div>
+      <a href="#waitlist" class="founding-cta" onclick="setRole('barber');document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});return false;">
+        ⭐ Claim Your Founding Spot →
+      </a>
+      <p class="founding-note">No credit card. No contract. Just 2 months free — then keep 100% of every booking forever.</p>
+    </div>
+
     <div class="perks">
       <div class="perk"><div class="perk-icon">🟢</div><div class="perk-title">Go Live Instantly</div><div class="perk-desc">Toggle your status and clients near you see you immediately. Available, busy, or offline — you control it in real time.</div></div>
       <div class="perk"><div class="perk-icon">💰</div><div class="perk-title">Keep 100%</div><div class="perk-desc">Zero commission. Zero booking fees. FADED makes money from premium features — never by taking a cut of your cut.</div></div>
@@ -723,6 +787,17 @@
     }
   }
   loadCount();
+
+  // ── Founding barber spot counter ──
+  async function loadBarberCount() {
+    const { count } = await sb.from('waitlist_signups').select('*', { count: 'exact', head: true }).eq('role', 'barber');
+    const taken = Math.min(count || 0, 10);
+    const spotsEl = document.getElementById('barber-spots-taken');
+    const barFill = document.getElementById('founding-bar-fill');
+    if (spotsEl) spotsEl.textContent = taken;
+    if (barFill) setTimeout(() => { barFill.style.width = (taken / 10 * 100) + '%'; }, 300);
+  }
+  loadBarberCount();
 
   // ── Join waitlist ──
   async function joinWaitlist() {
