@@ -459,7 +459,7 @@
   <div class="nav-logo">FAD<span>ED</span></div>
   <div style="display:flex;align-items:center;gap:20px">
     <a href="#" onclick="showAccessModal();return false;" style="color:#777;font-size:13px;text-decoration:none;font-weight:500;transition:color 0.2s" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#777'">Enter App →</a>
-    <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+    <a href="#" onclick="scrollToTop();return false;" class="nav-cta">Join the Waitlist</a>
   </div>
 </nav>
 
@@ -534,7 +534,7 @@
       </div>
 
       <div class="form-row" style="margin-bottom:8px">
-        <input class="form-input" id="input-name" type="text" placeholder="Your first name (optional)" autocomplete="given-name"/>
+        <input class="form-input" id="input-name" type="text" placeholder="Your first name" autocomplete="given-name"/>
       </div>
       <div class="form-row">
         <input class="form-input" id="input-email" type="email" placeholder="Your email address" autocomplete="email"/>
@@ -675,7 +675,7 @@
         <p class="founding-spots"><em id="barber-spots-taken">—</em> of 15 founding spots claimed</p>
         <div class="founding-bar"><div class="founding-bar-fill" id="founding-bar-fill" style="width:0%"></div></div>
       </div>
-      <a href="#waitlist" class="founding-cta" onclick="setRole('barber');document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});return false;">
+      <a href="#" onclick="scrollToTop('barber');return false;" class="founding-cta">
         ⭐ Claim Your Founding Spot →
       </a>
       <p class="founding-note">No credit card. No contract. Just 2 months free — then keep 100% of every booking forever.</p>
@@ -690,7 +690,7 @@
       <div class="perk"><div class="perk-icon">📊</div><div class="perk-title">Busy Hours Heatmap</div><div class="perk-desc">See when your busiest slots are across the last 30 or 90 days. Know when to promote, when to rest, and when to run specials.</div></div>
     </div>
     <div style="text-align:center;margin-top:56px">
-      <a href="#waitlist" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="setRole('barber');document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});return false;">Join as a Barber — Early Access</a>
+      <a href="#" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="scrollToTop('barber');return false;">Join as a Barber — Early Access</a>
       <p style="margin-top:16px;font-size:13px;color:#2a3d5c">No credit card. No contract. No commission.</p>
     </div>
   </div>
@@ -701,7 +701,7 @@
   <div class="cta-title" style="position:relative">READY WHEN<br><span class="blue">WE ARE?</span></div>
   <p style="font-size:17px;color:#333;margin-bottom:40px;position:relative">Be first in line when FADED launches.</p>
   <div style="position:relative">
-    <a href="#waitlist" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});return false;">✂️ Join the Waitlist</a>
+    <a href="#" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="scrollToTop();return false;">✂️ Join the Waitlist</a>
   </div>
   <p style="margin-top:24px;font-size:12px;color:#1a1a1a;position:relative">letsgetfaded.com · Launching June 2026</p>
 </section>
@@ -723,7 +723,7 @@
 <footer>
   <div class="footer-logo">FAD<span>ED</span></div>
   <div class="footer-links">
-    <a href="#waitlist">Join Waitlist</a>
+    <a href="#" onclick="scrollToTop();return false;">Join Waitlist</a>
     <a href="#barbers">For Barbers</a>
     <a href="mailto:hello@letsgetfaded.com">Contact</a>
     <a href="#" onclick="showAccessModal();return false;">Try the App</a>
@@ -806,6 +806,13 @@
     const msg   = document.getElementById('form-msg');
     msg.textContent = '';
 
+    if (!name) {
+      msg.className = 'form-error';
+      msg.textContent = 'Please enter your first name.';
+      document.getElementById('input-name').focus();
+      return;
+    }
+
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       msg.className = 'form-error';
       msg.textContent = 'Please enter a valid email address.';
@@ -816,7 +823,7 @@
     btn.disabled = true;
     btn.textContent = 'Joining...';
 
-    const { error } = await sb.from('waitlist_signups').insert({ email, name: name || null, role: currentRole });
+    const { error } = await sb.from('waitlist_signups').insert({ email, name, role: currentRole });
 
     if (error) {
       btn.disabled = false;
@@ -835,7 +842,7 @@
     fetch('https://qyjwfyboyijqiovtagby.supabase.co/functions/v1/send-waitlist-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ record: { email, name: name || null, role: currentRole } })
+      body: JSON.stringify({ record: { email, name, role: currentRole } })
     }).catch(() => {});
 
     // Show success
@@ -846,8 +853,8 @@
 
     const isBarber = currentRole === 'barber';
     document.getElementById('success-msg').textContent = isBarber
-      ? `You're on the early access list as a barber${name ? ', ' + name : ''}. We'll reach out before launch to get your profile set up. 💈`
-      : `We'll email you${name ? ', ' + name : ''}, the moment we go live. You're early — that means something. ✂️`;
+      ? `You're on the early access list as a barber, ${name}. We'll reach out before launch to get your profile set up. 💈`
+      : `We'll email you, ${name}, the moment we go live. You're early — that means something. ✂️`;
 
     document.getElementById('form-state').style.display   = 'none';
     document.getElementById('success-state').style.display = 'block';
@@ -855,7 +862,15 @@
   }
 
   // Enter key submits waitlist form
+  document.getElementById('input-name').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('input-email').focus(); });
   document.getElementById('input-email').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist(); });
+
+  // Scroll to top and focus form
+  function scrollToTop(role) {
+    if (role) setRole(role);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => { document.getElementById('input-name').focus(); }, 500);
+  }
 
   // ── ACCESS CODE MODAL ──
   const ACCESS_CODE = 'FADED26';
