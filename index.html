@@ -218,6 +218,9 @@
   .perk-icon { font-size: 24px; margin-bottom: 12px; }
   .perk-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 6px; }
   .perk-desc { font-size: 13px; color: #4B7AC7; line-height: 1.6; }
+  .perk-locked { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); grid-column: span 1; }
+  .perk-locked .perk-title { color: #555; }
+  .perk-locked .perk-desc { color: #333; }
 
   .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 560px; margin: 0 auto; border: 1px solid #1a1a1a; border-radius: 16px; overflow: hidden; }
   .vs-col { padding: 0; }
@@ -610,54 +613,6 @@
   </div>
 </section>
 
-<!-- FEATURES -->
-<div class="features">
-  <div style="max-width:900px;margin:0 auto;padding:80px 24px 0">
-    <div class="section-label">WHY FADED</div>
-    <div class="fade-divider"></div>
-    <h2 class="section-title" style="margin-bottom:0">BUILT DIFFERENT.</h2>
-  </div>
-  <div style="max-width:900px;margin:32px auto 0;padding:0 24px 80px">
-    <div class="feature-grid" style="border:1px solid #1a1a1a;border-radius:20px;overflow:hidden">
-      <div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Real-Time Availability</div><div class="feature-desc">Not just scheduling — see who is literally free right now. Barbers toggle their status live so you always see accurate availability.</div></div>
-      <div class="feature"><div class="feature-icon">📍</div><div class="feature-title">GPS-Powered Discovery</div><div class="feature-desc">Your location finds the closest available barber automatically. Sorted by distance and availability — not by who paid to be featured.</div></div>
-      <div class="feature"><div class="feature-icon">💈</div><div class="feature-title">Loyalty Stamp Card</div><div class="feature-desc">Every cut earns a stamp. Hit 10 and unlock a free service or discount — your barber sets the reward. A digital stamp card you can't lose.</div></div>
-      <div class="feature"><div class="feature-icon">🔔</div><div class="feature-title">Waitlist Notifications</div><div class="feature-desc">Slot fully booked? Join the waitlist. The moment someone cancels, you get an instant notification — with 15 minutes to claim it.</div></div>
-      <div class="feature"><div class="feature-icon">🚶</div><div class="feature-title">Walk-In Mode</div><div class="feature-desc">Barbers can flag walk-ins welcome right now. Just show up — no booking required. Perfect for last-minute cuts.</div></div>
-      <div class="feature"><div class="feature-icon">🎁</div><div class="feature-title">Gift a Haircut</div><div class="feature-desc">Send a digital gift card via SMS or email. Choose a dollar amount or a specific service. The perfect gift — redeemable at any booking.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- VS SECTION -->
-<section style="background:#080808;border-top:1px solid #111">
-  <div class="section" style="padding-top:80px;padding-bottom:80px">
-    <div class="section-label">THE DIFFERENCE</div>
-    <div class="fade-divider"></div>
-    <h2 class="section-title" style="margin-bottom:48px">FADED VS THE REST.</h2>
-    <div class="vs-grid">
-      <div class="vs-col">
-        <div class="vs-header faded">✂️ FADED</div>
-        <div class="vs-row"><span style="color:#F5F5F0">Live availability</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">GPS-sorted results</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">Walk-in mode</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">Zero booking fees</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">Loyalty stamps</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">No app download needed</span><span class="vs-check">✓</span></div>
-      </div>
-      <div class="vs-col">
-        <div class="vs-header them">Everyone else</div>
-        <div class="vs-row"><span style="color:#333">Live availability</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">GPS-sorted results</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">Walk-in mode</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">Zero booking fees</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">Loyalty stamps</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">No app download needed</span><span class="vs-x">✗</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FOR BARBERS -->
 <section id="barbers" class="barber-section">
   <div class="section" style="padding-top:100px;padding-bottom:100px">
@@ -686,12 +641,56 @@
       <div class="perk"><div class="perk-icon">💰</div><div class="perk-title">Keep 100%</div><div class="perk-desc">Zero commission. Zero booking fees. FADED makes money from premium features — never by taking a cut of your cut.</div></div>
       <div class="perk"><div class="perk-icon">📅</div><div class="perk-title">Full Schedule</div><div class="perk-desc">App bookings come in automatically. Add phone and walk-in clients manually. One place for your entire day.</div></div>
       <div class="perk"><div class="perk-icon">🔗</div><div class="perk-title">Your Booking Link</div><div class="perk-desc">Get a personal link like letsgetfaded.com/barber/yourname — share it on Instagram, WhatsApp, business cards.</div></div>
-      <div class="perk"><div class="perk-icon">🤖</div><div class="perk-title">AI Schedule Assistant</div><div class="perk-desc">Ask your schedule anything by voice or text. "Am I free at 3pm?" — it knows your day and answers instantly.</div></div>
-      <div class="perk"><div class="perk-icon">📊</div><div class="perk-title">Busy Hours Heatmap</div><div class="perk-desc">See when your busiest slots are across the last 30 or 90 days. Know when to promote, when to rest, and when to run specials.</div></div>
+      <div class="perk perk-locked"><div class="perk-icon">🔒</div><div class="perk-title">More at Launch</div><div class="perk-desc">Founding barbers unlock tools no other booking app has. You'll see them first.</div></div>
     </div>
     <div style="text-align:center;margin-top:56px">
       <a href="#" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="scrollToTop('barber');return false;">Join as a Barber — Early Access</a>
       <p style="margin-top:16px;font-size:13px;color:#2a3d5c">No credit card. No contract. No commission.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features">
+  <div style="max-width:900px;margin:0 auto;padding:80px 24px 0">
+    <div class="section-label">WHY FADED</div>
+    <div class="fade-divider"></div>
+    <h2 class="section-title" style="margin-bottom:0">BUILT DIFFERENT.</h2>
+  </div>
+  <div style="max-width:900px;margin:32px auto 0;padding:0 24px 80px">
+    <div class="feature-grid" style="border:1px solid #1a1a1a;border-radius:20px;overflow:hidden">
+      <div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Real-Time Availability</div><div class="feature-desc">Not just scheduling — see who is literally free right now. Barbers toggle their status live so you always see accurate availability.</div></div>
+      <div class="feature"><div class="feature-icon">📍</div><div class="feature-title">GPS-Powered Discovery</div><div class="feature-desc">Your location finds the closest available barber automatically. Sorted by distance and availability — not by who paid to be featured.</div></div>
+      <div class="feature"><div class="feature-icon">🔔</div><div class="feature-title">Waitlist Notifications</div><div class="feature-desc">Slot fully booked? Join the waitlist. The moment someone cancels, you get an instant notification — with 15 minutes to claim it.</div></div>
+      <div class="feature"><div class="feature-icon">🚶</div><div class="feature-title">Walk-In Mode</div><div class="feature-desc">See which barbers are open for walk-ins right now. Just show up — no booking required.</div></div>
+      <div class="feature"><div class="feature-icon">🎁</div><div class="feature-title">Gift a Haircut</div><div class="feature-desc">Send a digital gift card via SMS or email. The perfect gift — redeemable at any booking.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- VS SECTION -->
+<section style="background:#080808;border-top:1px solid #111">
+  <div class="section" style="padding-top:80px;padding-bottom:80px">
+    <div class="section-label">THE DIFFERENCE</div>
+    <div class="fade-divider"></div>
+    <h2 class="section-title" style="margin-bottom:48px">FADED VS THE REST.</h2>
+    <div class="vs-grid">
+      <div class="vs-col">
+        <div class="vs-header faded">✂️ FADED</div>
+        <div class="vs-row"><span style="color:#F5F5F0">Live availability</span><span class="vs-check">✓</span></div>
+        <div class="vs-row"><span style="color:#F5F5F0">GPS-sorted results</span><span class="vs-check">✓</span></div>
+        <div class="vs-row"><span style="color:#F5F5F0">Walk-in mode</span><span class="vs-check">✓</span></div>
+        <div class="vs-row"><span style="color:#F5F5F0">Zero booking fees</span><span class="vs-check">✓</span></div>
+        <div class="vs-row"><span style="color:#F5F5F0">No app download needed</span><span class="vs-check">✓</span></div>
+      </div>
+      <div class="vs-col">
+        <div class="vs-header them">Everyone else</div>
+        <div class="vs-row"><span style="color:#333">Live availability</span><span class="vs-x">✗</span></div>
+        <div class="vs-row"><span style="color:#333">GPS-sorted results</span><span class="vs-x">✗</span></div>
+        <div class="vs-row"><span style="color:#333">Walk-in mode</span><span class="vs-x">✗</span></div>
+        <div class="vs-row"><span style="color:#333">Zero booking fees</span><span class="vs-x">✗</span></div>
+        <div class="vs-row"><span style="color:#333">No app download needed</span><span class="vs-x">✗</span></div>
+      </div>
     </div>
   </div>
 </section>
