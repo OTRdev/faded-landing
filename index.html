@@ -636,9 +636,9 @@
     <div class="founding-banner">
       <div class="founding-badge"><div class="badge-dot"></div> Founding Barbers — Limited Spots</div>
       <h3 class="founding-title">2 MONTHS.<br><span>ON US.</span></h3>
-      <p class="founding-sub">Be one of the <strong>first 15 barbers</strong> to join FADED and get your first 2 months completely free — no credit card, no contract. Show up at launch already ahead of the competition. Your clients book you. You keep everything.</p>
+      <p class="founding-sub">Be one of the <strong>first 20 barbers</strong> to join FADED and get your first 2 months completely free — no credit card, no contract. Show up at launch already ahead of the competition. Your clients book you. You keep everything.</p>
       <div class="founding-counter">
-        <p class="founding-spots"><em id="barber-spots-taken">—</em> of 15 founding spots claimed</p>
+        <p class="founding-spots"><em id="barber-spots-taken">—</em> of 20 founding spots claimed</p>
         <div class="founding-bar"><div class="founding-bar-fill" id="founding-bar-fill" style="width:0%"></div></div>
       </div>
       <a href="#" onclick="scrollToTop('barber');return false;" class="founding-cta">
@@ -833,11 +833,11 @@
   // ── Founding barber spot counter ──
   async function loadBarberCount() {
     const { count } = await sb.from('waitlist_signups').select('*', { count: 'exact', head: true }).eq('role', 'barber');
-    const taken = Math.min(count || 0, 15);
+    const taken = Math.min(count || 0, 20);
     const spotsEl = document.getElementById('barber-spots-taken');
     const barFill = document.getElementById('founding-bar-fill');
     if (spotsEl) spotsEl.textContent = taken;
-    if (barFill) setTimeout(() => { barFill.style.width = (taken / 15 * 100) + '%'; }, 300);
+    if (barFill) setTimeout(() => { barFill.style.width = (taken / 20 * 100) + '%'; }, 300);
   }
   loadBarberCount();
 
