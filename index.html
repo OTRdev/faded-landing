@@ -907,7 +907,13 @@
   // Scroll to top and focus form
   function scrollToTop(role) {
     if (role) setRole(role);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const target = document.getElementById('input-name');
+    if (target) {
+      const y = target.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     setTimeout(() => { document.getElementById('input-name').focus(); }, 500);
   }
 
@@ -948,6 +954,74 @@
       setTimeout(() => btn.textContent = '🔗 Copy Link', 2000);
     });
   }
+
+  // ── BACKGROUND MUSIC ──
+  const bgAudio = new Audio(encodeURI('Drake Future Raul Apxpei Ran To Atlanta Instrumental.mp3'));
+  bgAudio.loop = true;
+  bgAudio.volume = 0.18;
+
+  let musicStarted = false;
+
+  const PLAY_ICON  = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  const PAUSE_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>';
+
+  function updateMusicBtn() {
+    const btn = document.getElementById('music-toggle');
+    if (!btn) return;
+    const playing = !bgAudio.paused;
+    btn.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
+    btn.title = playing ? 'Pause music' : 'Play music';
+    btn.style.opacity = playing ? '1' : '0.55';
+  }
+
+  function toggleMusic(e) {
+    e.stopPropagation(); // prevent document unlock listener from also firing
+    if (bgAudio.paused) {
+      musicStarted = true;
+      bgAudio.play().then(updateMusicBtn).catch(() => {});
+    } else {
+      bgAudio.pause();
+      updateMusicBtn();
+    }
+  }
+
+  // Start on first interaction anywhere on page (browser autoplay policy)
+  function unlockMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+    bgAudio.play().then(updateMusicBtn).catch(() => { musicStarted = false; });
+    document.removeEventListener('click', unlockMusic);
+    document.removeEventListener('keydown', unlockMusic);
+    document.removeEventListener('touchstart', unlockMusic);
+  }
+  document.addEventListener('click', unlockMusic);
+  document.addEventListener('keydown', unlockMusic);
+  document.addEventListener('touchstart', unlockMusic, { passive: true });
 </script>
+
+<!-- Music toggle button -->
+<button id="music-toggle" onclick="toggleMusic(event)" title="Play music" style="
+  position: fixed;
+  bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(15,15,15,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #F5F5F0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.55;
+  transition: opacity 0.2s, transform 0.15s;
+" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+</button>
+
 </body>
 </html>
