@@ -995,10 +995,14 @@
     document.removeEventListener('click', unmuteOnInteraction);
     document.removeEventListener('keydown', unmuteOnInteraction);
     document.removeEventListener('touchstart', unmuteOnInteraction);
+    document.removeEventListener('scroll', unmuteOnInteraction);
+    document.removeEventListener('touchmove', unmuteOnInteraction);
   }
   document.addEventListener('click', unmuteOnInteraction);
   document.addEventListener('keydown', unmuteOnInteraction);
   document.addEventListener('touchstart', unmuteOnInteraction, { passive: true });
+  document.addEventListener('scroll', unmuteOnInteraction, { passive: true });
+  document.addEventListener('touchmove', unmuteOnInteraction, { passive: true });
 </script>
 
 <!-- Music toggle button -->
