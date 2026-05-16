@@ -958,9 +958,8 @@
   // ── BACKGROUND MUSIC ──
   const bgAudio = new Audio(encodeURI('Drake Future Raul Apxpei Ran To Atlanta Instrumental.mp3'));
   bgAudio.loop = true;
-  bgAudio.volume = 0.18;
-
-  let musicStarted = false;
+  bgAudio.volume = 0.28;
+  bgAudio.muted = true;
 
   const PLAY_ICON  = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
   const PAUSE_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>';
@@ -968,16 +967,16 @@
   function updateMusicBtn() {
     const btn = document.getElementById('music-toggle');
     if (!btn) return;
-    const playing = !bgAudio.paused;
+    const playing = !bgAudio.paused && !bgAudio.muted;
     btn.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
     btn.title = playing ? 'Pause music' : 'Play music';
     btn.style.opacity = playing ? '1' : '0.55';
   }
 
   function toggleMusic(e) {
-    e.stopPropagation(); // prevent document unlock listener from also firing
+    e.stopPropagation();
     if (bgAudio.paused) {
-      musicStarted = true;
+      bgAudio.muted = false;
       bgAudio.play().then(updateMusicBtn).catch(() => {});
     } else {
       bgAudio.pause();
@@ -985,18 +984,21 @@
     }
   }
 
-  // Start on first interaction anywhere on page (browser autoplay policy)
-  function unlockMusic() {
-    if (musicStarted) return;
-    musicStarted = true;
-    bgAudio.play().then(updateMusicBtn).catch(() => { musicStarted = false; });
-    document.removeEventListener('click', unlockMusic);
-    document.removeEventListener('keydown', unlockMusic);
-    document.removeEventListener('touchstart', unlockMusic);
+  // Muted autoplay is allowed by browsers — start immediately, unmute on first interaction
+  bgAudio.play().catch(() => {});
+
+  function unmuteOnInteraction() {
+    if (!bgAudio.muted) return;
+    bgAudio.muted = false;
+    if (bgAudio.paused) bgAudio.play().catch(() => {});
+    updateMusicBtn();
+    document.removeEventListener('click', unmuteOnInteraction);
+    document.removeEventListener('keydown', unmuteOnInteraction);
+    document.removeEventListener('touchstart', unmuteOnInteraction);
   }
-  document.addEventListener('click', unlockMusic);
-  document.addEventListener('keydown', unlockMusic);
-  document.addEventListener('touchstart', unlockMusic, { passive: true });
+  document.addEventListener('click', unmuteOnInteraction);
+  document.addEventListener('keydown', unmuteOnInteraction);
+  document.addEventListener('touchstart', unmuteOnInteraction, { passive: true });
 </script>
 
 <!-- Music toggle button -->
