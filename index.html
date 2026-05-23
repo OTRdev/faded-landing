@@ -830,16 +830,47 @@
   }
   loadCount();
 
-  // ── Founding barber spot counter ──
+  // ── Founding barber spot counter — real-time ──
+  var _barberCount = 0;
+
+  function applyFoundingBar(count, animate) {
+    var taken = Math.min(count, 20);
+    _barberCount = count;
+    var spotsEl = document.getElementById('barber-spots-taken');
+    var barFill = document.getElementById('founding-bar-fill');
+    if (spotsEl) spotsEl.textContent = taken;
+    if (barFill) {
+      if (animate) {
+        setTimeout(function() { barFill.style.width = (taken / 20 * 100) + '%'; }, 80);
+      } else {
+        barFill.style.width = (taken / 20 * 100) + '%';
+      }
+    }
+  }
+
   async function loadBarberCount() {
     const { count } = await sb.from('waitlist_signups').select('*', { count: 'exact', head: true }).eq('role', 'barber');
-    const taken = Math.min(count || 0, 20);
-    const spotsEl = document.getElementById('barber-spots-taken');
-    const barFill = document.getElementById('founding-bar-fill');
-    if (spotsEl) spotsEl.textContent = taken;
-    if (barFill) setTimeout(() => { barFill.style.width = (taken / 20 * 100) + '%'; }, 300);
+    applyFoundingBar(count || 0, true);
   }
   loadBarberCount();
+
+  // Real-time: bar moves up on INSERT, re-fetches on DELETE/UPDATE
+  sb.channel('founding-barbers-live')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist_signups' }, function(payload) {
+      if (payload.new && payload.new.role === 'barber') {
+        applyFoundingBar(_barberCount + 1, true);
+      }
+      loadCount();
+    })
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'waitlist_signups' }, function() {
+      // Re-fetch on delete — we can't read the deleted row's role without REPLICA IDENTITY FULL
+      loadBarberCount();
+      loadCount();
+    })
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'waitlist_signups' }, function() {
+      loadBarberCount();
+    })
+    .subscribe();
 
   // ── Join waitlist ──
   async function joinWaitlist() {
