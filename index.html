@@ -865,25 +865,20 @@
   }
 
   async function loadBarberCount() {
-    const { count } = await sb.from('waitlist_signups').select('*', { count: 'exact', head: true }).eq('role', 'barber');
+    const { count } = await sb.from('barbers').select('*', { count: 'exact', head: true });
     applyFoundingBar(count || 0, true);
   }
   loadBarberCount();
 
-  // Real-time: bar moves up on INSERT, re-fetches on DELETE/UPDATE
+  // Real-time: bar moves up instantly on INSERT, re-fetches on DELETE/UPDATE
   sb.channel('founding-barbers-live')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist_signups' }, function(payload) {
-      if (payload.new && payload.new.role === 'barber') {
-        applyFoundingBar(_barberCount + 1, true);
-      }
-      loadCount();
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'barbers' }, function() {
+      applyFoundingBar(_barberCount + 1, true);
     })
-    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'waitlist_signups' }, function() {
-      // Re-fetch on delete — we can't read the deleted row's role without REPLICA IDENTITY FULL
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'barbers' }, function() {
       loadBarberCount();
-      loadCount();
     })
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'waitlist_signups' }, function() {
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'barbers' }, function() {
       loadBarberCount();
     })
     .subscribe();
