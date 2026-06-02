@@ -871,20 +871,17 @@
   }
 
   async function loadBarberCount() {
-    const { count } = await sb.from('barbers').select('*', { count: 'exact', head: true });
+    const { count } = await sb.from('waitlist_signups').select('*', { count: 'exact', head: true }).eq('role', 'barber');
     applyFoundingBar(count || 0, true);
   }
   loadBarberCount();
 
-  // Real-time: bar moves up instantly on INSERT, re-fetches on DELETE/UPDATE
+  // Real-time: bar moves up instantly when a new barber joins the waitlist
   sb.channel('founding-barbers-live')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'barbers' }, function() {
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist_signups', filter: 'role=eq.barber' }, function() {
       applyFoundingBar(_barberCount + 1, true);
     })
-    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'barbers' }, function() {
-      loadBarberCount();
-    })
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'barbers' }, function() {
+    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'waitlist_signups' }, function() {
       loadBarberCount();
     })
     .subscribe();
