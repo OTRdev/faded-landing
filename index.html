@@ -871,8 +871,9 @@
   }
 
   async function loadBarberCount() {
-    const { count } = await sb.from('waitlist_signups').select('*', { count: 'exact', head: true }).eq('role', 'barber');
-    applyFoundingBar(count || 0, true);
+    // RPC bypasses RLS — direct table query was silently blocked by anon SELECT policy
+    const { data } = await sb.rpc('get_barber_waitlist_count');
+    applyFoundingBar(data || 0, true);
   }
   loadBarberCount();
 
