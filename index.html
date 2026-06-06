@@ -926,12 +926,7 @@
       return;
     }
 
-    // Fire confirmation email (non-blocking)
-    fetch('https://qyjwfyboyijqiovtagby.supabase.co/functions/v1/send-waitlist-email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ record: { email, name, role: currentRole } })
-    }).catch(() => {});
+    // Email sent by DB trigger (on_waitlist_signup → notify_waitlist_signup)
 
     // Show success
     const shareText = encodeURIComponent("I just joined the waitlist for FADED — real-time barber booking launching June 2026. Get in early 💈");
