@@ -808,14 +808,12 @@
 
   function tick() {
     const now = Date.now();
-    const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
-    const days = Math.round((LAUNCH_MIDNIGHT - todayMidnight) / 86400000);
-    if (days <= 0) { goLive(); return; }
-    const tomorrowMidnight = todayMidnight.getTime() + 86400000;
-    const subDay = tomorrowMidnight - now;
-    const hours = Math.floor(subDay / 3600000);
-    const mins  = Math.floor((subDay % 3600000) / 60000);
-    const secs  = Math.floor((subDay % 60000)   / 1000);
+    const remaining = LAUNCH_MIDNIGHT - now;
+    if (remaining <= 0) { goLive(); return; }
+    const days  = Math.floor(remaining / 86400000);
+    const hours = Math.floor((remaining % 86400000) / 3600000);
+    const mins  = Math.floor((remaining % 3600000)  / 60000);
+    const secs  = Math.floor((remaining % 60000)    / 1000);
 
     [['cd-days',days],['cd-hours',hours],['cd-mins',mins],['cd-secs',secs]].forEach(([id,val]) => {
       const el = document.getElementById(id);
