@@ -24,8 +24,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{cursor:none;box-sizing:border-box;margin:0;padding:0}
-@media(hover:none),(pointer:coarse){*{cursor:auto}#c-dot,#c-ring{display:none}}
+*{box-sizing:border-box;margin:0;padding:0}
+html.custom-cursor *{cursor:none}
+html.custom-cursor #c-dot,html.custom-cursor #c-ring{display:block}
+#c-dot,#c-ring{display:none}
 html{scroll-behavior:smooth;overflow-x:hidden;background:#0C0C10}
 body{background:#0C0C10;color:#F5F5F0;font-family:'DM Sans',sans-serif;overflow-x:hidden}
 ::selection{background:#3B6CF7;color:#fff}
@@ -854,13 +856,14 @@ function initCursor(){
   var dot=document.getElementById('c-dot'),ring=document.getElementById('c-ring');
   if(!dot||!ring)return;
   var ready=false;
-  var fb=setTimeout(()=>{if(!ready){dot.style.display='none';ring.style.display='none';document.body.style.cursor='auto';document.documentElement.style.setProperty('cursor','auto','important')}},1500);
+  var html=document.documentElement;
+  var fb=setTimeout(function(){if(!ready)html.classList.remove('custom-cursor')},1500);
   var dX=gsap.quickTo(dot,'x',{duration:0.12,ease:'power3.out'});
   var dY=gsap.quickTo(dot,'y',{duration:0.12,ease:'power3.out'});
   var rX=gsap.quickTo(ring,'x',{duration:0.35,ease:'power3.out'});
   var rY=gsap.quickTo(ring,'y',{duration:0.35,ease:'power3.out'});
   window.addEventListener('mousemove',function(e){
-    ready=true;clearTimeout(fb);
+    if(!ready){ready=true;clearTimeout(fb);html.classList.add('custom-cursor')}
     dX(e.clientX);dY(e.clientY);rX(e.clientX);rY(e.clientY);
   });
   document.querySelectorAll('a,button,input[type="range"],[data-tilt]').forEach(function(el){
