@@ -246,9 +246,71 @@ footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,2
 @keyframes screenShake{0%{transform:translate(0,0)}30%{transform:translate(-2px,1px)}60%{transform:translate(2px,-1px)}100%{transform:translate(0,0)}}
 
 @media(max-width:768px){
-  .steps-line{display:none}
+
+  /* ── NAV ── */
   nav{padding:12px 16px}
   .nav-links{display:none}
+
+  /* ── HERO ── */
+  #hero{padding:120px 20px 60px;min-height:auto}
+  .hero-inner{flex-direction:column;gap:36px;align-items:center;text-align:center}
+  .hero-left{flex:none;width:100%;min-width:0}
+  .hero-badge{margin:0 auto 24px}
+  .hero-p{margin:20px auto 0;max-width:100%}
+  .hero-cta{display:block;text-align:center;padding:16px 28px;font-size:15px}
+  .ticker-wrap{text-align:left}
+  .hero-right{flex:none;width:100%;min-width:0;height:280px;animation:none}
+
+  /* ── STATS ── */
+  #stats{padding:60px 20px;gap:16px}
+  .stat-card{padding:28px 16px}
+  .stat-val{font-size:42px}
+
+  /* ── AUDIENCES ── */
+  #audiences{padding:80px 20px 60px}
+  .personas-grid{grid-template-columns:1fr;gap:24px;margin-top:44px}
+  .persona-card{padding:28px 22px 24px}
+  .mockup-wrap{width:180px;height:378px}
+  .section-h2{font-size:clamp(26px,7vw,42px)}
+
+  /* ── HOW IT WORKS ── */
+  #how{padding:60px 20px 80px}
+  .steps-grid{grid-template-columns:1fr;gap:36px;margin-top:48px}
+  .steps-line{display:none}
+  .step{text-align:center}
+  .step-p{max-width:100%}
+
+  /* ── WHY FADED ── */
+  #why{padding:80px 20px}
+  .why-row,.why-row.rev{flex-direction:column;gap:32px;margin-top:60px;text-align:center}
+  .why-text{min-width:0;flex:none;width:100%}
+  .why-p{max-width:100%;margin:12px auto 0}
+  .calc-card,.ping-card,.tax-card{flex:none;width:100%;min-width:0}
+  .ping-card{height:200px}
+  .tax-badges{justify-content:center}
+
+  /* ── STORY ── */
+  #story{padding:80px 20px}
+  .story-inner{flex-direction:column;gap:40px;text-align:center}
+  .story-text{flex:none;width:100%;min-width:0}
+  .story-p{font-size:16px}
+  .story-photo-wrap{max-width:100%;width:100%;min-width:0}
+  .story-photo{height:280px;transform:none}
+  .story-photo:hover{transform:none}
+  .story-sig{text-align:center}
+
+  /* ── FAQ ── */
+  #faq{padding:80px 20px}
+  .faq-q{font-size:15px}
+
+  /* ── FOOTER ── */
+  footer{padding:60px 20px 32px}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-bottom{flex-direction:column;text-align:center;gap:10px}
+
+  /* ── INTRO ── */
+  #intro-logo{font-size:clamp(52px,18vw,120px)}
+  #hud-kicker{font-size:11px;letter-spacing:3px}
 }
 </style>
 </head>
