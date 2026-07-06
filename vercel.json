@@ -5,7 +5,7 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "letsgetfaded.com" }],
-      "destination": "https://app.letsgetfaded.com/$1",
+      "destination": "https://www.letsgetfaded.com/$1",
       "permanent": true
     }
   ]
