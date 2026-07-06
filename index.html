@@ -1099,7 +1099,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
   var reduced=false,lowPower=false,played=false;
   try{reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){}
-  try{lowPower=window.matchMedia('(max-width:480px)').matches||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2)}catch(e){}
+  try{lowPower=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2)}catch(e){}
   try{played=sessionStorage.getItem('faded_intro_played')==='1'}catch(e){}
 
   if(reduced||lowPower||played){
