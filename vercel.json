@@ -1,5 +1,12 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    { "source": "/(.*)", "destination": "https://app.letsgetfaded.com/$1", "permanent": true }
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "letsgetfaded.com" }],
+      "destination": "https://app.letsgetfaded.com/$1",
+      "permanent": true
+    }
   ]
 }

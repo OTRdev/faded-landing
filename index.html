@@ -1,1078 +1,1063 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<link rel="icon" href="favicon.ico" sizes="any"/>
-<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32"/>
-<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
-<meta name="description" content="FADED — Find an available barber near you right now. Real-time booking. No calls, no DMs, no waiting. Live now in Canada."/>
-<meta property="og:title" content="FADED — Find Your Barber Right Now"/>
-<meta property="og:description" content="Real-time barber booking. No calls. No DMs. No waiting. Live now in Canada."/>
-<meta property="og:image" content="https://app.letsgetfaded.com/OGv2-image.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta property="og:image:type" content="image/png"/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://www.letsgetfaded.com"/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="FADED — Find Your Barber Right Now"/>
-<meta name="twitter:description" content="Real-time barber booking. No calls. No DMs. No waiting. Live now in Canada."/>
-<meta name="twitter:image" content="https://app.letsgetfaded.com/OGv2-image.png"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="FADED — Find an available barber near you right now. Real-time booking. No calls, no DMs, no waiting. Live now in Canada.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.letsgetfaded.com/">
+<meta property="og:title" content="FADED — Live Barber Booking">
+<meta property="og:description" content="Find an available barber near you right now and book a fresh cut in seconds.">
+<meta property="og:image" content="https://www.letsgetfaded.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="FADED">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FADED — Live Barber Booking">
+<meta name="twitter:description" content="Find an available barber near you right now and book a fresh cut in seconds.">
+<meta name="twitter:image" content="https://www.letsgetfaded.com/og-image.png">
 <title>FADED — Find Your Barber Right Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap');
+*{cursor:none;box-sizing:border-box;margin:0;padding:0}
+@media(hover:none),(pointer:coarse){*{cursor:auto}#c-dot,#c-ring{display:none}}
+html{scroll-behavior:smooth;overflow-x:hidden;background:#0C0C10}
+body{background:#0C0C10;color:#F5F5F0;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+::selection{background:#3B6CF7;color:#fff}
+a:focus-visible,button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:2px solid #3B6CF7;outline-offset:3px;border-radius:4px}
 
-  :root {
-    --black: #0A0A0A;
-    --white: #F5F5F0;
-    --blue:  #2563EB;
-    --blue2: #1D4ED8;
-    --blue-lt: #93C5FD;
-    --grey:  #111;
-    --muted: #6B7280;
-  }
+/* ── CURSOR ── */
+#c-ring{position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px;border-radius:50%;border:1.5px solid rgba(59,108,247,0.6);pointer-events:none;z-index:9999;will-change:transform}
+#c-dot{position:fixed;top:0;left:0;width:6px;height:6px;margin:-3px;border-radius:50%;background:#3B6CF7;pointer-events:none;z-index:9999;will-change:transform}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
-  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; max-width: 100%; width: 100%; }
+/* ── SCROLL PROGRESS ── */
+#scroll-bar{position:fixed;top:0;left:0;right:0;height:2.5px;background:rgba(255,255,255,0.04);z-index:200}
+#scroll-fill{height:100%;background:linear-gradient(90deg,#3B6CF7,#F59E0B);width:0%;transition:width 0.1s linear}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 16px 32px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(10,10,10,0.92); backdrop-filter: blur(16px);
-    border-bottom: 1px solid #1a1a1a;
-  }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 5px; }
-  .nav-logo span { color: var(--blue); }
-  .nav-cta {
-    padding: 10px 24px; background: var(--blue); border: none; border-radius: 10px;
-    color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
-    text-decoration: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
-  }
-  .nav-cta:hover { background: var(--blue2); transform: translateY(-1px); }
+/* ── FILM GRAIN ── */
+#grain{position:fixed;inset:0;z-index:150;pointer-events:none;opacity:0.035;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27200%27 height=%27200%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%272%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E');background-size:200px 200px}
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 100px 24px 60px; position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.14) 0%, transparent 70%);
-    pointer-events: none;
-  }
+/* ── INTRO OVERLAY ── */
+#intro{position:fixed;inset:0;z-index:999;background:#0C0C10;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity 0.7s ease}
+#intro.exiting{opacity:0;pointer-events:none}
+#intro.done{display:none}
+#intro-skip{position:absolute;top:24px;right:24px;z-index:20;padding:10px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:20px;color:rgba(245,245,240,0.75);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
+#intro-hud{position:absolute;inset:0;pointer-events:none;opacity:0;animation:hudFadeIn 1s ease 0.5s forwards}
+.hud-corner{position:absolute;width:46px;height:46px;border-color:rgba(59,108,247,0.65);border-style:solid}
+.hud-tl{top:36px;left:36px;border-width:2px 0 0 2px}
+.hud-tr{top:36px;right:36px;border-width:2px 2px 0 0}
+.hud-bl{bottom:36px;left:36px;border-width:0 0 2px 2px}
+.hud-br{bottom:36px;right:36px;border-width:0 2px 2px 0}
+#hud-scan{position:absolute;top:50%;left:50%;width:1px;height:60vh;margin-left:-0.5px;margin-top:-30vh;background:linear-gradient(rgba(59,108,247,0),rgba(59,108,247,0.6),rgba(59,108,247,0));animation:scanSweep 2.6s linear infinite}
+#hud-kicker{position:absolute;top:70px;left:50%;transform:translateX(-50%);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;color:rgba(59,108,247,0.7);text-transform:uppercase;animation:kickerFade 1.2s ease 0.8s both}
+#intro-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#intro-flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.95) 0%,rgba(59,108,247,0.55) 35%,rgba(12,12,16,0) 70%);pointer-events:none;opacity:0}
+#intro-flash.fire{animation:flashPulse 0.8s ease-out forwards}
+#sw1,#sw2{position:absolute;top:50%;left:50%;width:280px;height:280px;margin:-140px;border-radius:50%;opacity:0;pointer-events:none}
+#sw1{border:2px solid #3B6CF7}
+#sw2{border:2px solid #F59E0B}
+#sw1.fire{animation:shockwave 1s cubic-bezier(.15,.7,.3,1) forwards}
+#sw2.fire{animation:shockwave 1s cubic-bezier(.15,.7,.3,1) 0.12s forwards}
+#intro-logo{position:absolute;z-index:3;pointer-events:none;font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(52px,10vw,160px);letter-spacing:1px;white-space:nowrap}
+#logo-fad,#logo-ed{display:inline-block;opacity:0}
+#logo-fad{color:#F5F5F0}
+#logo-ed{color:#3B6CF7;text-shadow:0 0 40px rgba(59,108,247,0.6),0 0 80px rgba(59,108,247,0.28)}
+#logo-fad.fire{animation:slamIn 0.8s cubic-bezier(.22,.75,.32,1.1) forwards}
+#logo-ed.fire{animation:slamIn 0.8s cubic-bezier(.22,.75,.32,1.1) 0.08s forwards}
+#intro.shake{animation:screenShake 0.4s ease-out}
 
-  .launch-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3);
-    padding: 8px 18px; border-radius: 20px; margin-bottom: 28px;
-    animation: fadeUp 0.5s ease both;
-  }
-  .launch-badge span { font-size: 12px; font-weight: 700; color: var(--blue-lt); letter-spacing: 1.5px; }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 32px;background:rgba(12,12,16,0.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,0.07)}
+.nav-logo{display:flex;align-items:center;font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1.5px;text-decoration:none;flex-shrink:0}
+.nav-logo .fad{color:#F5F5F0}.nav-logo .ed{color:#3B6CF7}
+.nav-links{display:flex;align-items:center;flex:1 1 auto;gap:clamp(10px,2.2vw,40px);flex-wrap:nowrap;justify-content:space-evenly;margin:0 clamp(12px,3vw,48px);min-width:0;overflow-x:auto;scrollbar-width:none;font-family:'DM Sans',sans-serif;font-size:clamp(12.5px,1.3vw,18px);font-weight:500}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-link{position:relative;padding:10px 2px;text-decoration:none;color:rgba(245,245,240,0.65);white-space:nowrap;flex-shrink:0;transition:color 0.25s ease,letter-spacing 0.25s ease}
+.nav-link:hover{color:#F5F5F0;letter-spacing:0.2px}
+.nav-link.active{color:#F5F5F0;font-weight:600}
+.nav-link-dot{position:absolute;left:0;right:0;bottom:2px;height:2px;border-radius:2px;background:linear-gradient(90deg,#3B6CF7,#F59E0B);opacity:0;box-shadow:0 0 12px rgba(59,108,247,0.7);transition:opacity 0.3s ease}
+.nav-link.active .nav-link-dot{opacity:1}
+.nav-cta{display:inline-block;flex-shrink:0;white-space:nowrap;padding:11px 20px;background:#3B6CF7;color:#fff;border-radius:9px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;text-decoration:none;box-shadow:0 8px 24px -6px rgba(59,108,247,0.6);transition:transform 0.2s ease,box-shadow 0.2s ease}
+.nav-cta:hover{transform:translateY(-2px) scale(1.035);box-shadow:0 14px 34px -6px rgba(59,108,247,0.85)}
 
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 16vw, 156px);
-    letter-spacing: 8px; line-height: 0.88;
-    margin-bottom: 28px; animation: fadeUp 0.5s ease 0.1s both;
-  }
-  .hero-title .blue { color: var(--blue); }
+/* ── HERO ── */
+#hero{position:relative;z-index:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:150px 24px 100px;overflow:hidden}
+.hero-grid{position:absolute;inset:-10% -5%;z-index:-1;opacity:0.5;background-image:linear-gradient(rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.035) 1px,transparent 1px);background-size:64px 64px}
+.hero-bloom{position:absolute;top:-18%;left:50%;width:900px;height:900px;margin-left:-450px;background:radial-gradient(circle,rgba(59,108,247,0.16),transparent 65%);filter:blur(10px);z-index:-1;pointer-events:none}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1180px;display:flex;align-items:center;gap:56px;flex-wrap:wrap}
+.hero-left{flex:1 1 440px;min-width:300px}
+.hero-badge{display:flex;align-items:center;gap:8px;padding:7px 16px;border-radius:20px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.5px;color:#22C55E;margin-bottom:28px;width:fit-content}
+.hero-badge-dot{width:7px;height:7px;border-radius:50%;background:#22C55E;animation:pulseDot 2.2s infinite}
+.hero-h1{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(36px,5.5vw,64px);line-height:1.18;margin:0;letter-spacing:-1px}
+.hero-h1 .blue{color:#3B6CF7}
+.hero-p{font-family:'DM Sans',sans-serif;font-size:clamp(16px,2vw,18px);line-height:1.6;color:rgba(245,245,240,0.6);max-width:480px;margin:32px 0 0}
+.hero-cta{margin-top:36px;display:inline-block;padding:18px 40px;white-space:nowrap;background:linear-gradient(135deg,#3B6CF7,#2a52c9);color:#fff;border-radius:13px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:16px;text-decoration:none;box-shadow:0 24px 60px -12px rgba(59,108,247,0.55);transition:transform 0.2s ease,box-shadow 0.2s ease}
+.hero-cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 34px 80px -10px rgba(59,108,247,0.85)}
+.ticker-wrap{margin-top:38px;height:22px;overflow:hidden;position:relative}
+.ticker-line{position:absolute;top:0;left:0;display:flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;color:rgba(245,245,240,0.65);opacity:0;transform:translateY(-8px);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none}
+.ticker-line.active{opacity:1;transform:translateY(0)}
+.ticker-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.hero-right{flex:1 1 420px;min-width:300px;position:relative;height:440px;border-radius:22px;background:rgba(8,8,12,0.75);backdrop-filter:blur(20px) saturate(140%);border:1px solid rgba(255,255,255,0.1);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 40px 90px -25px rgba(0,0,0,0.65);overflow:hidden;animation:floatSlow 7s ease-in-out infinite}
+.hero-globe-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;transition:opacity 0.1s linear}
+.hero-card-glow{position:absolute;inset:0;background:radial-gradient(ellipse 90% 70% at 30% 25%,rgba(59,108,247,0.12),transparent 60%);pointer-events:none}
+.hero-card-status{position:absolute;top:18px;left:18px;right:18px;padding:11px 16px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(6px);display:flex;align-items:center;gap:8px;z-index:2}
+.hero-card-status-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px rgba(34,197,94,0.8);flex-shrink:0}
+.hero-card-status-text{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:rgba(245,245,240,0.6);letter-spacing:0.2px}
+.hero-card-tag{position:absolute;bottom:16px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:8px;z-index:2;pointer-events:none}
+.hero-card-tag-dot{width:5px;height:5px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px rgba(34,197,94,0.8)}
+.hero-card-tag-text{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,245,240,0.55)}
 
-  .hero-sub {
-    font-size: clamp(16px, 3vw, 22px); color: rgba(245,245,240,0.80);
-    max-width: 520px; line-height: 1.65; font-weight: 400;
-    margin-bottom: 14px; animation: fadeUp 0.5s ease 0.2s both;
-  }
-  .hero-detail {
-    font-size: 11px; color: #888; letter-spacing: 2px;
-    margin-bottom: 52px; animation: fadeUp 0.5s ease 0.25s both;
-  }
+/* ── STATS ── */
+#stats{position:relative;z-index:0;max-width:1120px;margin:0 auto;padding:90px 24px;border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px}
+.stats-bloom{position:absolute;top:-40%;right:-10%;width:520px;height:520px;background:radial-gradient(circle,rgba(245,158,11,0.08),transparent 65%);filter:blur(10px);pointer-events:none;z-index:-1}
+.stat-card{text-align:center;padding:36px 24px;border-radius:18px;background:rgba(255,255,255,0.035);backdrop-filter:blur(16px) saturate(140%);border:1px solid rgba(255,255,255,0.09);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);transition:transform 0.3s ease,box-shadow 0.3s ease}
+.stat-card:hover{transform:translateY(-6px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 20px 40px -15px rgba(0,0,0,0.5)}
+.stat-val{font-family:'Oswald',sans-serif;font-weight:700;font-size:52px}
+.stat-label{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,245,240,0.55);margin-top:10px}
+.stat-sub{font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(245,245,240,0.45);margin-top:6px}
 
-  /* ── COUNTDOWN ── */
-  .countdown-wrap {
-    display: flex; gap: 16px; justify-content: center; margin-bottom: 52px;
-    animation: fadeUp 0.5s ease 0.3s both; flex-wrap: wrap;
-  }
-  .cd-block {
-    display: flex; flex-direction: column; align-items: center;
-    background: #111; border: 1px solid #1e1e1e; border-radius: 18px;
-    padding: 20px 24px; min-width: 80px;
-  }
-  .cd-num {
-    font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1;
-    color: var(--white); letter-spacing: 2px; transition: transform 0.15s ease;
-  }
-  .cd-num.flip { transform: scale(1.12); }
-  .cd-label { font-size: 9px; color: #888; letter-spacing: 2.5px; font-weight: 700; margin-top: 6px; }
-  .cd-sep { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #555; align-self: center; padding-bottom: 20px; }
+/* ── AUDIENCES ── */
+#audiences{position:relative;z-index:0;padding:140px 24px 100px;max-width:1200px;margin:0 auto;overflow:hidden}
+.audiences-bloom{position:absolute;top:10%;left:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(59,108,247,0.1),transparent 65%);filter:blur(10px);pointer-events:none;z-index:-1}
+.section-eyebrow{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-align:center}
+.section-h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(30px,4.5vw,50px);text-align:center;margin:14px 0 0}
+.section-sub{font-family:'DM Sans',sans-serif;text-align:center;color:rgba(245,245,240,0.55);max-width:520px;margin:16px auto 0;font-size:16px}
+.personas-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:36px;margin-top:64px}
+.persona-card{padding:40px 32px 32px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(255,255,255,0.1);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 40px 80px -30px rgba(0,0,0,0.6);transition:transform 0.2s ease-out;will-change:transform}
+.persona-badge{display:inline-block;padding:6px 14px;border-radius:20px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.persona-h3{font-family:'Oswald',sans-serif;font-size:25px;font-weight:600;margin:18px 0 0}
+.persona-p{font-family:'DM Sans',sans-serif;font-size:14.5px;line-height:1.6;color:rgba(245,245,240,0.55);margin:10px 0 0}
+.mockup-wrap{width:220px;height:462px;margin:32px auto 0;border-radius:34px;border:7px solid #1c1c22;background:#000;position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.05);animation:floatSlow 6s ease-in-out infinite;overflow:hidden}
+.mockup-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.mockup-notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:70px;height:16px;background:#1c1c22;border-radius:10px;z-index:2}
+.barber-toggle-wrap{margin-top:26px;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+.barber-toggle-row{display:flex;align-items:center;justify-content:space-between}
+.barber-toggle-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:rgba(245,245,240,0.8)}
+.toggle-switch{width:44px;height:24px;border-radius:12px;position:relative;cursor:pointer;transition:background 0.2s ease;flex-shrink:0}
+.toggle-thumb{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform 0.2s ease}
+.barber-status{font-family:'DM Sans',sans-serif;font-size:12.5px;margin-top:8px}
 
-  /* ── WAITLIST FORM ── */
-  .waitlist-section {
-    width: 100%; max-width: 480px; margin: 0 auto;
-    animation: fadeUp 0.5s ease 0.4s both;
-  }
+/* ── HOW IT WORKS ── */
+#how{padding:100px 24px 140px;max-width:1080px;margin:0 auto}
+.how-inner{position:relative}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:80px}
+.steps-line{position:absolute;top:29px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,rgba(59,108,247,0.5),rgba(245,158,11,0.5));z-index:0}
+.step{position:relative;z-index:1;text-align:center}
+.step-num{width:58px;height:58px;margin:0 auto;border-radius:50%;background:#0C0C10;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:20px;font-weight:600}
+.step-h3{font-family:'Oswald',sans-serif;font-size:20px;font-weight:600;margin:22px 0 0}
+.step-p{font-family:'DM Sans',sans-serif;font-size:14.5px;line-height:1.6;color:rgba(245,245,240,0.55);margin:8px auto 0;max-width:230px}
 
-  .role-toggle {
-    display: flex; gap: 8px; margin-bottom: 14px; background: #111;
-    border: 1px solid #1e1e1e; border-radius: 12px; padding: 4px;
-  }
-  .role-btn {
-    flex: 1; padding: 10px; border: none; border-radius: 9px; cursor: pointer;
-    font-size: 13px; font-weight: 700; font-family: 'DM Sans', sans-serif;
-    transition: all 0.18s; background: transparent; color: #444;
-  }
-  .role-btn.active { background: var(--blue); color: #fff; }
+/* ── WHY FADED ── */
+#why{position:relative;z-index:0;padding:140px 24px;background:linear-gradient(180deg,transparent,rgba(59,108,247,0.05) 40%,transparent);max-width:1160px;margin:0 auto;overflow:hidden}
+.why-bloom{position:absolute;top:20%;right:-15%;width:560px;height:560px;background:radial-gradient(circle,rgba(245,158,11,0.08),transparent 65%);filter:blur(10px);pointer-events:none;z-index:-1}
+.why-row{display:flex;align-items:center;gap:64px;flex-wrap:wrap;margin-top:110px}
+.why-row.rev{flex-wrap:wrap-reverse}
+.why-row + .why-row{margin-top:120px}
+.why-text{flex:1 1 340px;min-width:300px}
+.why-eyebrow{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.why-h3{font-family:'Oswald',sans-serif;font-size:32px;font-weight:600;margin:12px 0 0}
+.why-p{font-family:'DM Sans',sans-serif;font-size:15.5px;line-height:1.7;color:rgba(245,245,240,0.55);margin-top:14px;max-width:440px}
+.calc-card{flex:1 1 380px;min-width:300px;padding:36px;border-radius:24px;background:rgba(255,255,255,0.04);backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(255,255,255,0.1);box-shadow:inset 0 1px 0 rgba(255,255,255,0.07)}
+.calc-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+.calc-cuts-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,245,240,0.5)}
+.calc-cuts-val{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:#F5F5F0}
+#cuts-slider{width:100%;accent-color:#3B6CF7;height:6px;cursor:pointer;display:block}
+.calc-row{margin-top:10px;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:12px}
+.calc-row.other{background:rgba(245,245,240,0.06);margin-top:28px}
+.calc-row.faded{background:linear-gradient(90deg,rgba(59,108,247,0.18),rgba(59,108,247,0.06));border:1px solid rgba(59,108,247,0.3)}
+.calc-row-label{font-family:'DM Sans',sans-serif;font-size:13.5px;color:rgba(245,245,240,0.6)}
+.calc-row.faded .calc-row-label{color:rgba(245,245,240,0.85)}
+.calc-row-val{font-family:'Oswald',sans-serif;font-size:17px;font-weight:600;color:rgba(245,245,240,0.75)}
+.calc-row.faded .calc-row-val{font-weight:700;color:#3B6CF7}
+.calc-savings{margin-top:20px;text-align:center;font-family:'DM Sans',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.2px;color:#22C55E}
+.ping-card{flex:1 1 380px;min-width:300px;height:260px;border-radius:24px;background:#08080c;border:1px solid rgba(255,255,255,0.08);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.ping-grid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(255,255,255,0.04) 0px,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 40px)}
+.ping-dot{position:relative;width:14px;height:14px;border-radius:50%;background:#22C55E}
+.ping-ring{position:absolute;inset:0;border-radius:50%;border:2px solid #22C55E;animation:ripple 2.4s ease-out infinite}
+.ping-ring-2{animation-delay:1.2s}
+.tax-card{flex:1 1 380px;min-width:300px;padding:28px;border-radius:20px;background:rgba(245,158,11,0.07);backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(245,158,11,0.25);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 30px 60px -25px rgba(245,158,11,0.25)}
+.tax-badges{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tax-badge{font-family:'Syne',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:0.5px;padding:4px 10px;border-radius:14px;background:rgba(255,255,255,0.06);color:rgba(245,245,240,0.75)}
+.tax-row{display:flex;align-items:flex-start;gap:12px}
+.tax-dot{width:9px;height:9px;border-radius:2px;background:#F59E0B;margin-top:5px;flex-shrink:0}
+.tax-p{font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;color:rgba(245,245,240,0.8);margin:0}
 
-  .form-row { display: flex; gap: 8px; }
-  .form-input {
-    flex: 1; padding: 16px 18px;
-    background: #111; border: 1.5px solid #1e1e1e; border-radius: 14px;
-    color: var(--white); font-size: 14px; font-family: 'DM Sans', sans-serif;
-    outline: none; transition: border-color 0.2s;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-  .form-input::placeholder { color: #555; }
-  .form-input:focus { border-color: var(--blue); }
+/* ── STORY ── */
+#story{position:relative;z-index:0;padding:140px 24px;background:rgba(255,255,255,0.015);border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);overflow:hidden}
+.story-bloom{position:absolute;top:-10%;left:30%;width:640px;height:640px;background:radial-gradient(circle,rgba(59,108,247,0.07),transparent 65%);filter:blur(10px);pointer-events:none;z-index:-1}
+.story-inner{max-width:1120px;margin:0 auto;display:flex;gap:64px;flex-wrap:wrap;align-items:center}
+.story-text{flex:1 1 420px;min-width:300px}
+.story-p{font-family:'DM Sans',sans-serif;font-size:clamp(17px,1.8vw,20px);line-height:1.75;color:rgba(245,245,240,0.85);margin-top:22px}
+.story-p+.story-p{margin-top:20px}
+.story-sig{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#3B6CF7;margin-top:26px}
+.story-photo-wrap{flex:1 1 300px;min-width:260px;max-width:380px}
+.story-photo{height:420px;border-radius:24px;transform:rotate(-3deg);overflow:hidden;background:#101015;border:1px solid rgba(255,255,255,0.1);box-shadow:inset 0 1px 0 rgba(255,255,255,0.06),0 40px 80px -30px rgba(0,0,0,0.7);transition:transform 0.4s ease;display:block}
+.story-photo:hover{transform:rotate(-1deg) scale(1.015)}
+.story-photo img{width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:grayscale(0.15) contrast(1.05)}
 
-  .submit-btn {
-    padding: 16px 28px; background: var(--blue); border: none; border-radius: 14px;
-    color: #fff; font-size: 15px; font-weight: 800; cursor: pointer;
-    font-family: 'Syne', sans-serif; letter-spacing: 0.5px;
-    box-shadow: 0 8px 32px rgba(37,99,235,0.4); transition: all 0.2s; white-space: nowrap;
-  }
-  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,99,235,0.5); }
-  .submit-btn:disabled { opacity: 0.6; cursor: default; transform: none; }
+/* ── FAQ ── */
+#faq{padding:140px 24px;max-width:800px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,0.09);padding:24px 0}
+.faq-q{position:relative;padding:12px 50px 12px 12px;border-radius:12px;cursor:pointer;transition:background 0.25s ease;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:600;line-height:1.45;margin:-12px}
+.faq-q:hover{background:rgba(255,255,255,0.03)}
+.faq-icon{position:absolute;top:50%;right:12px;transform:translateY(-50%);width:18px;height:18px;flex-shrink:0}
+.faq-icon::before,.faq-icon::after{content:'';position:absolute;background:#3B6CF7;border-radius:1px;transition:transform 0.25s ease}
+.faq-icon::before{top:50%;left:0;width:100%;height:2px;transform:translateY(-50%)}
+.faq-icon::after{top:0;left:50%;width:2px;height:100%;transform:translateX(-50%)}
+.faq-item.open .faq-icon::after{transform:translateX(-50%) rotate(90deg)}
+.faq-panel{overflow:hidden;max-height:0;opacity:0;margin-top:0;transition:max-height 0.3s ease,opacity 0.3s ease,margin-top 0.3s ease}
+.faq-item.open .faq-panel{max-height:320px;opacity:1;margin-top:12px}
+.faq-a{font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;color:rgba(245,245,240,0.6);margin:0;white-space:pre-line}
 
-  .form-note { font-size: 11px; color: #777; margin-top: 10px; letter-spacing: 0.5px; }
+/* ── FOOTER ── */
+footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,255,255,0.07)}
+.footer-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1.5px}
+.footer-logo .fad{color:#F5F5F0}.footer-logo .ed{color:#3B6CF7}
+.footer-tagline{font-family:'DM Sans',sans-serif;font-size:13.5px;color:rgba(245,245,240,0.45);margin-top:14px;max-width:220px;line-height:1.6}
+.footer-col-head{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,245,240,0.4);margin-bottom:16px}
+.footer-links{display:flex;flex-direction:column;gap:12px;font-family:'DM Sans',sans-serif;font-size:14px}
+.footer-links a{color:rgba(245,245,240,0.65);text-decoration:none;transition:color 0.2s ease}
+.footer-links a:hover{color:#F5F5F0}
+.footer-bottom{max-width:1160px;margin:56px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:'DM Sans',sans-serif;font-size:12.5px;color:rgba(245,245,240,0.35)}
+.footer-bottom a{color:#3B6CF7;text-decoration:none;font-weight:600}
 
-  /* Success state */
-  .success-box {
-    background: rgba(34,197,94,0.08); border: 1.5px solid rgba(34,197,94,0.25);
-    border-radius: 18px; padding: 28px 24px; text-align: center;
-    animation: fadeUp 0.35s ease both;
-  }
-  .success-icon { font-size: 40px; margin-bottom: 12px; }
-  .success-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 900; color: #22C55E; margin-bottom: 6px; }
-  .success-sub { font-size: 13px; color: #999; margin-bottom: 20px; line-height: 1.6; }
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
 
-  /* Share buttons */
-  .share-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-  .share-btn {
-    padding: 10px 18px; border-radius: 10px; border: 1.5px solid #1e1e1e;
-    background: #111; color: #ccc; font-size: 12px; font-weight: 700;
-    cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-  }
-  .share-btn:hover { border-color: #333; color: var(--white); }
+/* ── KEYFRAMES ── */
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.55)}70%{box-shadow:0 0 0 16px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes ripple{0%{transform:scale(0.3);opacity:0.6}100%{transform:scale(2.6);opacity:0}}
+@keyframes scanSweep{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+@keyframes kickerFade{0%{opacity:0;letter-spacing:8px}100%{opacity:1;letter-spacing:4px}}
+@keyframes hudFadeIn{0%{opacity:0}100%{opacity:1}}
+@keyframes flashPulse{0%{opacity:0}30%{opacity:0.55}100%{opacity:0}}
+@keyframes slamIn{0%{transform:scale(1.5);opacity:0}65%{transform:scale(0.97);opacity:1}85%{transform:scale(1.015)}100%{transform:scale(1);opacity:1}}
+@keyframes shockwave{0%{transform:scale(0.3);opacity:0.5;border-width:2px}100%{transform:scale(1);opacity:0;border-width:0.5px}}
+@keyframes screenShake{0%{transform:translate(0,0)}30%{transform:translate(-2px,1px)}60%{transform:translate(2px,-1px)}100%{transform:translate(0,0)}}
 
-  /* Error */
-  .form-error { font-size: 12px; color: #EF4444; margin-top: 8px; }
-  .already-msg { font-size: 12px; color: #F59E0B; margin-top: 8px; }
-
-  /* Signup count */
-  .signup-count {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 18px; font-size: 12px; color: #444; letter-spacing: 0.5px;
-  }
-  .signup-avatars { display: flex; }
-  .signup-avatar {
-    width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--black);
-    background: var(--blue); margin-left: -6px; display: flex; align-items: center;
-    justify-content: center; font-size: 10px; font-weight: 800; color: #fff;
-    font-family: 'Syne', sans-serif;
-  }
-  .signup-avatar:first-child { margin-left: 0; }
-
-  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-
-  /* ── SECTIONS ── */
-  .section { max-width: 900px; margin: 0 auto; padding: 100px 24px; }
-  .section-label { font-size: 11px; letter-spacing: 4px; color: var(--blue); font-weight: 700; text-align: center; margin-bottom: 16px; }
-  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 8vw, 72px); letter-spacing: 4px; text-align: center; line-height: 1; margin-bottom: 60px; }
-  .fade-divider { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); margin: 0 auto 24px; border-radius: 1px; }
-
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  @media(max-width:680px) { .steps { grid-template-columns: 1fr; } }
-
-  .step {
-    background: #111; border: 1px solid #1a1a1a; border-radius: 20px; padding: 32px 28px;
-    position: relative; overflow: hidden; transition: all 0.3s;
-  }
-  .step:hover { border-color: #2563EB44; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(37,99,235,0.1); }
-  .step-num { font-family: 'Bebas Neue', sans-serif; font-size: 72px; color: rgba(37,99,235,0.08); position: absolute; top: -8px; right: 16px; line-height: 1; }
-  .step-icon { font-size: 32px; margin-bottom: 16px; }
-  .step-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
-  .step-desc { font-size: 14px; color: #aaa; line-height: 1.7; }
-
-  .features { background: #0d0d0d; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; }
-  .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: #1a1a1a; }
-  @media(max-width:600px) { .feature-grid { grid-template-columns: 1fr; } }
-  .feature { background: #0d0d0d; padding: 40px 36px; transition: background 0.2s; }
-  .feature:hover { background: #111; }
-  .feature-icon { font-size: 28px; margin-bottom: 14px; }
-  .feature-title { font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
-  .feature-desc { font-size: 14px; color: #999; line-height: 1.7; }
-
-  .barber-section { background: linear-gradient(135deg, #0f1f3d, #0a0a0a); border-top: 1px solid #1e3a5f; }
-  .perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
-  @media(max-width:680px) { .perks { grid-template-columns: 1fr; } }
-  .perk { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.15); border-radius: 16px; padding: 24px; }
-  .perk-icon { font-size: 24px; margin-bottom: 12px; }
-  .perk-title { font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.5px; }
-  .perk-desc { font-size: 13px; color: #4B7AC7; line-height: 1.6; }
-  .perk-locked { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); grid-column: span 1; }
-  .perk-locked .perk-title { color: #555; }
-  .perk-locked .perk-desc { color: #333; }
-
-  .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 560px; margin: 0 auto; border: 1px solid #1a1a1a; border-radius: 16px; overflow: hidden; }
-  .vs-col { padding: 0; }
-  .vs-header { padding: 16px 20px; font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800; border-bottom: 1px solid #1a1a1a; }
-  .vs-header.faded { background: var(--blue); color: #fff; }
-  .vs-header.them { background: #111; color: #777; }
-  .vs-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #111; font-size: 13px; }
-  .vs-row:last-child { border-bottom: none; }
-  .vs-check { color: #22C55E; font-weight: 700; }
-  .vs-x { color: #666; }
-
-  /* ── CTA SECTIONS ── */
-  .cta-section { text-align: center; padding: 120px 24px; position: relative; overflow: hidden; }
-  .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(37,99,235,0.08) 0%, transparent 70%); }
-  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 10vw, 96px); letter-spacing: 6px; line-height: 0.9; margin-bottom: 24px; position: relative; }
-  .cta-title .blue { color: var(--blue); }
-
-  .btn-primary {
-    padding: 16px 36px; background: var(--blue); border: none; border-radius: 14px;
-    color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; text-decoration: none;
-    font-family: 'Syne', sans-serif; letter-spacing: 0.5px;
-    box-shadow: 0 8px 32px rgba(37,99,235,0.4); transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(37,99,235,0.5); }
-
-  footer { border-top: 1px solid #1a1a1a; padding: 40px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; }
-  .footer-logo span { color: var(--blue); }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { color: #777; text-decoration: none; font-size: 13px; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
-  .footer-copy { color: #666; font-size: 12px; }
-
-  /* ── FOUNDING BARBERS ── */
-  .founding-banner {
-    background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(245,158,11,0.03));
-    border: 1px solid rgba(245,158,11,0.22); border-radius: 20px;
-    padding: 40px 32px; text-align: center; margin-bottom: 48px; position: relative; overflow: hidden;
-  }
-  .founding-banner::before {
-    content: ''; position: absolute; top: -40px; right: -40px;
-    width: 200px; height: 200px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .founding-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3);
-    padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
-    font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; color: #F59E0B; letter-spacing: 1.5px; text-transform: uppercase;
-  }
-  .founding-badge .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #F59E0B; animation: rblink 1.5s ease-in-out infinite; }
-  .founding-title {
-    font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 9vw, 60px);
-    letter-spacing: 4px; color: #F5F5F0; line-height: 1; margin-bottom: 16px;
-  }
-  .founding-title span { color: #F59E0B; }
-  .founding-sub { font-family: 'DM Sans', sans-serif; font-size: 15px; color: #9CA3AF; line-height: 1.75; max-width: 460px; margin: 0 auto 28px; }
-  .founding-sub strong { color: #FCD34D; }
-  .founding-counter { margin-bottom: 28px; }
-  .founding-spots { font-family: 'DM Sans', sans-serif; font-size: 13px; color: #777; margin-bottom: 10px; }
-  .founding-spots em { font-style: normal; color: #F59E0B; font-weight: 700; font-size: 18px; }
-  .founding-bar { max-width: 280px; height: 5px; background: rgba(245,158,11,0.1); border-radius: 3px; margin: 0 auto; overflow: hidden; }
-  .founding-bar-fill { height: 100%; background: linear-gradient(90deg, #F59E0B, #FCD34D); border-radius: 3px; transition: width 1.2s ease; }
-  .founding-cta {
-    display: inline-flex; align-items: center; gap: 8px; margin-top: 4px;
-    padding: 16px 36px; background: linear-gradient(135deg, #F59E0B, #D97706);
-    border: none; border-radius: 14px; color: #0A0A0A;
-    font-family: 'DM Sans', sans-serif !important; font-size: 15px; font-weight: 600; font-style: normal; cursor: pointer; text-decoration: none; letter-spacing: 0;
-    box-shadow: 0 8px 28px rgba(245,158,11,0.35); transition: all 0.2s;
-  }
-  .founding-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(245,158,11,0.45); color: #0A0A0A; }
-  .founding-note { font-family: 'DM Sans', sans-serif; font-size: 12px; color: #555; margin-top: 14px; }
-
-  /* ── MOBILE ── */
-  @media(max-width: 768px) {
-    nav { padding: 14px 20px; }
-    footer { flex-direction: column; text-align: center; gap: 16px; }
-    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
-    .footer-copy { text-align: center; }
-    .section { padding: 60px 20px; }
-    .steps { grid-template-columns: 1fr; }
-    .perks { grid-template-columns: 1fr; }
-    .feature-grid { grid-template-columns: 1fr; }
-    .vs-grid { max-width: 100%; }
-  }
-
-  @media(max-width: 520px) {
-    /* Hero — tightened so the Notify button is visible without scrolling */
-    .hero { padding: 70px 20px 32px; width: 100%; }
-    .scissors-wrap { display: none; }
-    .redacted { display: none; }
-    .top-tag { justify-content: center; margin-bottom: 10px; }
-    .hero-title { letter-spacing: 3px; margin-bottom: 10px; }
-    .hero-sub { font-size: clamp(15px, 4vw, 18px); text-align: center; margin-bottom: 6px; }
-    .hero-detail { font-size: 9px; letter-spacing: 0.5px; white-space: normal; text-align: center; overflow: hidden; margin-bottom: 16px; }
-    .hero-status { justify-content: center; margin-bottom: 12px; }
-    .s-text-live { font-size: 9px; letter-spacing: .18em; text-align: center; }
-    .section-title { letter-spacing: 2px; }
-    .founding-banner { padding: 28px 20px; }
-    .founding-title { letter-spacing: 2px; }
-    .founding-cta { padding: 14px 24px; font-size: 14px; width: 100%; justify-content: center; }
-    .founding-sub { font-size: 14px; }
-
-    /* Countdown — fit all 4 boxes on one row */
-    .countdown-wrap { gap: 4px; margin-bottom: 14px; flex-wrap: nowrap; justify-content: center; width: 100%; padding: 0 4px; }
-    .c-box { width: clamp(54px, 19vw, 72px); height: clamp(54px, 19vw, 72px); }
-    .cd-num { font-size: clamp(22px, 6.5vw, 32px); }
-    .cd-label { font-size: 7px; letter-spacing: 1.2px; margin-top: 3px; }
-    .cd-sep { font-size: clamp(20px, 5vw, 28px); padding-bottom: 12px; }
-    .c-box::before, .c-box::after { width: 7px; height: 7px; }
-    .c-top { height: 1.5px; }
-
-    /* Form */
-    .waitlist-section { padding: 0 4px; }
-    .form-row { flex-direction: column; gap: 10px; }
-    .submit-btn { width: 100%; justify-content: center; text-align: center; }
-    .form-input { width: 100%; }
-    .form-note { text-align: center; }
-    .signup-count { justify-content: center; }
-    .share-row { justify-content: center; }
-
-    /* Nav compact */
-    nav { padding: 12px 16px; }
-    .nav-logo { font-size: 24px; }
-    .nav-cta { padding: 8px 16px; font-size: 13px; }
-
-    /* Access modal */
-    .access-modal-box { padding: 32px 20px; }
-
-    /* VS section */
-    .vs-row { font-size: 12px; padding: 10px 14px; }
-
-    /* Sections */
-    .section-title { font-size: clamp(32px, 10vw, 56px); }
-    .cta-title { font-size: clamp(40px, 12vw, 72px); }
-  }
-
-  /* Extra small phones */
-  @media(max-width: 360px) {
-    .countdown-wrap { gap: 2px; }
-    .c-box { width: 52px; height: 52px; }
-    .cd-num { font-size: 20px; }
-    .cd-sep { font-size: 18px; }
-  }
-
-  /* ── HERO BACKGROUND FX ── */
-  .hero-glow {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 55% at 50% 30%, rgba(37,99,235,0.22) 0%, transparent 70%);
-    animation: breathe 4s ease-in-out infinite;
-    pointer-events: none;
-  }
-  @keyframes breathe { 0%,100%{opacity:.65} 50%{opacity:1} }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image: linear-gradient(rgba(37,99,235,0.05) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(37,99,235,0.05) 1px, transparent 1px);
-    background-size: 48px 48px;
-    animation: gridPulse 6s ease-in-out infinite alternate;
-    pointer-events: none;
-  }
-  @keyframes gridPulse { 0%{opacity:.3} 100%{opacity:.9} }
-  .hero-scan {
-    position: absolute; left:0; right:0; top:0; height:2px;
-    background: linear-gradient(90deg, transparent, rgba(37,99,235,0.55), transparent);
-    animation: heroScan 7s linear infinite;
-    pointer-events: none;
-  }
-  @keyframes heroScan { 0%{top:0;opacity:0} 5%{opacity:1} 95%{opacity:1} 100%{top:100%;opacity:0} }
-
-  /* ── CLASSIFIED TAG ── */
-  .top-tag { display:flex; align-items:center; gap:clamp(10px,3vw,16px); margin-bottom:22px; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .15s both; }
-  .tag-line { width:clamp(36px,7vw,64px); height:1px; background:linear-gradient(90deg,transparent,#2563EB); }
-  .tag-line.r { background:linear-gradient(90deg,#2563EB,transparent); }
-  .tag-text { font-size:clamp(9px,2vw,11px); font-weight:500; color:#2563EB; letter-spacing:.38em; text-transform:uppercase; }
-
-  /* ── SCISSORS ── */
-  .scissors-wrap { margin-bottom:12px; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .3s both; }
-  .scissors-wrap svg { width:clamp(30px,7vw,42px); height:clamp(30px,7vw,42px); opacity:.35; }
-
-  /* ── REDACTED BARS ── */
-  .redacted { display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:22px; animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .55s both; }
-  .r-label { font-size:9px; font-weight:500; letter-spacing:.4em; color:#2563EB; text-transform:uppercase; margin-bottom:2px; }
-  .r-row { display:flex; align-items:center; gap:10px; }
-  .r-bar { height:11px; background:rgba(37,99,235,.1); border:1px solid rgba(37,99,235,.18); border-radius:2px; }
-  .r-dot-sm { width:5px; height:5px; border-radius:50%; background:#2563EB; opacity:.5; animation:rblink 2s ease-in-out infinite; flex-shrink:0; }
-  @keyframes rblink { 0%,100%{opacity:.5} 50%{opacity:1} }
-
-  /* ── ANGULAR COUNTDOWN BOXES ── */
-  .countdown-wrap { margin-bottom:14px; }
-  .c-box {
-    width:clamp(68px,17vw,104px); height:clamp(68px,17vw,104px);
-    border:1px solid rgba(37,99,235,.24); background:rgba(37,99,235,.04);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    position:relative; border-radius:0;
-  }
-  .c-box::before { content:''; position:absolute; top:0; left:0; width:10px; height:10px; border-top:1.5px solid rgba(37,99,235,.65); border-left:1.5px solid rgba(37,99,235,.65); }
-  .c-box::after  { content:''; position:absolute; bottom:0; right:0; width:10px; height:10px; border-bottom:1.5px solid rgba(37,99,235,.65); border-right:1.5px solid rgba(37,99,235,.65); }
-  .c-top { position:absolute; top:0; left:0; right:0; height:2px; background:#2563EB; opacity:.45; }
-
-  /* ── HERO STATUS ── */
-  .hero-status { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
-  .s-dot-live { width:6px; height:6px; border-radius:50%; background:#2563EB; box-shadow:0 0 8px #2563EB; animation:rblink 2s ease-in-out infinite; flex-shrink:0; }
-  .s-text-live { font-size:10px; color:rgba(245,245,240,.55); letter-spacing:.28em; text-transform:uppercase; }
-
-  /* hero tagline emphasis */
-  .hero-sub em { font-style:normal; color:#F5F5F0; font-weight:500; }
-
-  /* ── ACCESS CODE MODAL ── */
-  .access-modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);animation:fadeUp .2s ease both; }
-  .access-modal-box { background:#0d0d0d;border:1px solid #1e1e1e;border-radius:20px;padding:40px 32px;max-width:360px;width:90%;text-align:center;position:relative; }
-  .access-modal-box::before { content:'';position:absolute;top:0;left:0;width:14px;height:14px;border-top:1.5px solid rgba(37,99,235,.65);border-left:1.5px solid rgba(37,99,235,.65); }
-  .access-modal-box::after  { content:'';position:absolute;bottom:0;right:0;width:14px;height:14px;border-bottom:1.5px solid rgba(37,99,235,.65);border-right:1.5px solid rgba(37,99,235,.65); }
-  .access-code-input { width:100%;padding:16px;background:#111;border:1.5px solid #1e1e1e;border-radius:12px;color:#F5F5F0;font-size:20px;font-family:'Bebas Neue',sans-serif;letter-spacing:.3em;text-align:center;outline:none;transition:border-color .2s;margin-bottom:8px; -webkit-appearance:none; appearance:none; }
-  .access-code-input:focus { border-color:#2563EB; }
-  .access-code-input.error { border-color:#EF4444;animation:shake .3s ease; }
-  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
-
-  /* ── APP ACCESS LINK ── */
-  .app-access-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    margin-top: 20px; font-size: 12px; color: #333;
-    text-decoration: none; letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .app-access-link:hover { color: var(--blue-lt); }
-  .app-access-link .arrow { color: var(--blue); font-size: 14px; transition: transform 0.2s; }
-  .app-access-link:hover .arrow { transform: translateX(3px); }
+@media(max-width:768px){
+  .steps-line{display:none}
+  nav{padding:12px 16px}
+  .nav-links{display:none}
+}
 </style>
 </head>
-<body>
+<body style="opacity:0;transition:opacity 0.9s ease">
+
+<div id="grain"></div>
+<div id="c-ring"></div>
+<div id="c-dot"></div>
+<div id="scroll-bar"><div id="scroll-fill"></div></div>
+
+<!-- INTRO OVERLAY -->
+<div id="intro">
+  <button id="intro-skip" onclick="skipIntro()">Skip intro →</button>
+  <div id="intro-hud">
+    <div class="hud-corner hud-tl"></div>
+    <div class="hud-corner hud-tr"></div>
+    <div class="hud-corner hud-bl"></div>
+    <div class="hud-corner hud-br"></div>
+    <div id="hud-scan"></div>
+    <div id="hud-kicker">Scanning Network</div>
+  </div>
+  <canvas id="intro-canvas"></canvas>
+  <div id="intro-flash"></div>
+  <div id="sw1"></div>
+  <div id="sw2"></div>
+  <div id="intro-logo">
+    <span id="logo-fad">FAD</span><span id="logo-ed">ED</span>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">FAD<span>ED</span></div>
-  <div style="display:flex;align-items:center;gap:20px">
-    <a href="#" onclick="showAccessModal();return false;" style="color:#777;font-size:13px;text-decoration:none;font-weight:500;transition:color 0.2s" onmouseover="this.style.color='#93C5FD'" onmouseout="this.style.color='#777'">Enter App →</a>
-    <a href="#" onclick="scrollToTop();return false;" class="nav-cta">Join the Waitlist</a>
+  <a href="#" class="nav-logo"><span class="fad">FAD</span><span class="ed">ED</span></a>
+  <div class="nav-links">
+    <a href="#audiences" class="nav-link" data-section="audiences">Product<span class="nav-link-dot"></span></a>
+    <a href="#how" class="nav-link" data-section="how">How It Works<span class="nav-link-dot"></span></a>
+    <a href="#why" class="nav-link" data-section="why">Why FADED<span class="nav-link-dot"></span></a>
+    <a href="#story" class="nav-link" data-section="story">Origin<span class="nav-link-dot"></span></a>
+    <a href="#faq" class="nav-link" data-section="faq">FAQ<span class="nav-link-dot"></span></a>
   </div>
+  <a href="https://app.letsgetfaded.com" target="_blank" rel="noopener noreferrer" class="nav-cta">Get Started</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-scan"></div>
-
-  <div class="top-tag">
-    <div class="tag-line"></div>
-    <span class="tag-text">Classified</span>
-    <div class="tag-line r"></div>
-  </div>
-
-  <div class="scissors-wrap">
-    <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="14" cy="14" r="9" stroke="#2563EB" stroke-width="1.8" fill="none"/>
-      <circle cx="14" cy="42" r="9" stroke="#2563EB" stroke-width="1.8" fill="none"/>
-      <line x1="21" y1="19" x2="54" y2="52" stroke="#2563EB" stroke-width="1.8"/>
-      <line x1="21" y1="37" x2="54" y2="4" stroke="#2563EB" stroke-width="1.8"/>
-      <circle cx="14" cy="14" r="4" fill="#2563EB" opacity="0.4"/>
-      <circle cx="14" cy="42" r="4" fill="#2563EB" opacity="0.4"/>
-    </svg>
-  </div>
-
-  <h1 class="hero-title">GET<br><span class="blue">FAD</span>ED.</h1>
-
-  <p class="hero-sub">Something is <em>changing</em> the way you find your barber.</p>
-  <p class="hero-detail">TORONTO · MISSISSAUGA · HAMILTON · AND EVERYWHERE ELSE</p>
-
-  <!-- Redacted -->
-  <div class="redacted">
-    <div class="r-label">Details — Classified</div>
-    <div class="r-row">
-      <div class="r-dot-sm"></div>
-      <div class="r-bar" style="width:clamp(90px,24vw,160px)"></div>
-      <div class="r-dot-sm"></div>
-    </div>
-    <div class="r-row">
-      <div class="r-bar" style="width:clamp(55px,14vw,90px)"></div>
-      <div class="r-dot-sm"></div>
-      <div class="r-bar" style="width:clamp(70px,20vw,130px)"></div>
-    </div>
-  </div>
-
-  <!-- Countdown -->
-  <div class="countdown-wrap" id="countdown">
-    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-days">00</div><div class="cd-label">DAYS</div></div>
-    <div class="cd-sep">:</div>
-    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-hours">00</div><div class="cd-label">HOURS</div></div>
-    <div class="cd-sep">:</div>
-    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-mins">00</div><div class="cd-label">MINS</div></div>
-    <div class="cd-sep">:</div>
-    <div class="c-box"><div class="c-top"></div><div class="cd-num" id="cd-secs">00</div><div class="cd-label">SECS</div></div>
-  </div>
-
-  <!-- Status line -->
-  <div class="hero-status">
-    <div class="s-dot-live"></div>
-    <span class="s-text-live">Something is live — you just don't know it yet</span>
-  </div>
-
-  <!-- Waitlist form -->
-  <div class="waitlist-section" id="waitlist">
-
-    <div id="form-state">
-      <!-- Role toggle -->
-      <div class="role-toggle">
-        <button class="role-btn active" id="role-client" onclick="setRole('client')">✂️ I need cuts</button>
-        <button class="role-btn" id="role-barber" onclick="setRole('barber')">💈 I'm a barber</button>
-      </div>
-
-      <!-- Founding spots live counter — visible only when barber tab is active -->
-      <div id="founding-inline" style="display:none;margin-bottom:14px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:10px 16px;align-items:center;justify-content:space-between;gap:10px">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:6px;height:6px;border-radius:50%;background:#F59E0B;flex-shrink:0;animation:rblink 1.5s ease-in-out infinite"></div>
-          <span style="font-size:12px;color:#9CA3AF;font-family:'DM Sans',sans-serif">Founding spots</span>
-        </div>
-        <div style="font-size:13px;font-weight:700;color:#F59E0B;font-family:'DM Sans',sans-serif"><span id="inline-spots-taken">—</span> of 20 claimed · <span id="inline-spots-left" style="color:#FCD34D">—</span> left</div>
-      </div>
-
-      <div class="form-row" style="margin-bottom:8px">
-        <input class="form-input" id="input-name" type="text" placeholder="Your first name" autocomplete="given-name"/>
-      </div>
-      <div class="form-row">
-        <input class="form-input" id="input-email" type="email" placeholder="Your email address" autocomplete="email"/>
-        <button class="submit-btn" id="submit-btn" onclick="joinWaitlist()">Notify Me →</button>
-      </div>
-      <div id="form-msg"></div>
-      <p class="form-note">No spam. Ever. Just a single email when we go live.</p>
-
-      <p style="margin-top:12px; font-size:13px; color:#6B7280; text-align:center; display:flex; align-items:center; justify-content:center; gap:6px;">
-        <span style="display:inline-flex; gap:-4px;">
-          <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#2563EB,#1D4ED8);border:2px solid #0A0A0A;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-right:-6px;">K</span>
-          <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#059669,#047857);border:2px solid #0A0A0A;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-right:-6px;">M</span>
-          <span style="width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#6D28D9);border:2px solid #0A0A0A;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;">J</span>
-        </span>
-        <span><strong style="color:#F5F5F0;font-weight:700;">100+</strong> already on the list</span>
-      </p>
-
-      <div class="signup-count" id="signup-count" style="display:none">
-        <div class="signup-avatars">
-          <div class="signup-avatar">K</div>
-          <div class="signup-avatar">M</div>
-          <div class="signup-avatar">J</div>
-        </div>
-        <span id="count-text">people already on the list</span>
+<section id="hero">
+  <div class="hero-grid" id="hero-grid"></div>
+  <div class="hero-bloom" id="hero-bloom"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>LIVE ACROSS CANADA</div>
+      <h1 class="hero-h1">Find Your Barber.<br><span class="blue">Right Now.</span></h1>
+      <p class="hero-p">Real-time availability, real prices, real barbers — see who's actually free near you and book in seconds.</p>
+      <a href="https://app.letsgetfaded.com" target="_blank" rel="noopener noreferrer" class="hero-cta">Get Started — It's Free</a>
+      <div class="ticker-wrap">
+        <div class="ticker-line active" data-ticker="0"><span class="ticker-dot" style="background:#22C55E"></span>Devon just went live in Belleville</div>
+        <div class="ticker-line" data-ticker="1"><span class="ticker-dot" style="background:#3B6CF7"></span>Marcus booked in Toronto — 2 min ago</div>
+        <div class="ticker-line" data-ticker="2"><span class="ticker-dot" style="background:#22C55E"></span>Priya just went live in Ottawa</div>
       </div>
     </div>
+    <div class="hero-right" id="hero-card">
+      <canvas class="hero-globe-canvas" id="hero-canvas"></canvas>
+      <div class="hero-card-glow"></div>
+      <div class="hero-card-status">
+        <span class="hero-card-status-dot"></span>
+        <span class="hero-card-status-text">Barbers going live across Canada</span>
+      </div>
+      <div class="hero-card-tag">
+        <span class="hero-card-tag-dot"></span>
+        <span class="hero-card-tag-text">The FADED Network</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div id="success-state" style="display:none">
-      <div class="success-box">
-        <div class="success-icon">🎉</div>
-        <div class="success-title">You're on the list!</div>
-        <div class="success-sub" id="success-msg">We'll email you the moment FADED goes live. You're early — that means something.</div>
-        <div class="share-row">
-          <a id="share-twitter" href="#" target="_blank" class="share-btn">𝕏 Share</a>
-          <a id="share-whatsapp" href="#" target="_blank" class="share-btn">💬 WhatsApp</a>
-          <button onclick="copyLink()" class="share-btn" id="copy-btn">🔗 Copy Link</button>
-        </div>
-        <div style="margin-top:16px">
-          <a href="#" onclick="showAccessModal();return false;" class="app-access-link">
-            Want to explore the app now? <span class="arrow">→</span>
-          </a>
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-bloom"></div>
+  <div class="stat-card reveal" data-reveal>
+    <div class="stat-val" style="color:#F5F5F0" data-stat="barbers">0</div>
+    <div class="stat-label">Founding Barbers</div>
+    <div class="stat-sub">Live now, growing every week</div>
+  </div>
+  <div class="stat-card reveal" data-reveal>
+    <div class="stat-val" style="color:#3B6CF7" data-stat="commission">$0</div>
+    <div class="stat-label">Commission</div>
+    <div class="stat-sub">Ever. On every single cut.</div>
+  </div>
+  <div class="stat-card reveal" data-reveal>
+    <div class="stat-val" style="color:#F59E0B" data-stat="flat">$0</div>
+    <div class="stat-label">Flat Rate / mo</div>
+    <div class="stat-sub">What barbers pay. Period.</div>
+  </div>
+</section>
+
+<!-- AUDIENCES -->
+<section id="audiences">
+  <div class="audiences-bloom"></div>
+  <div class="reveal" data-reveal>
+    <div class="section-eyebrow" style="color:#3B6CF7">Product</div>
+    <h2 class="section-h2">Built for everyone in the chair.</h2>
+    <p class="section-sub">One platform. Three very different jobs, done right.</p>
+  </div>
+  <div class="personas-grid">
+    <!-- Client -->
+    <div style="perspective:1400px">
+      <div class="persona-card" data-tilt="client">
+        <span class="persona-badge" style="background:rgba(59,108,247,0.15);color:#3B6CF7;border:1px solid rgba(59,108,247,0.35)">For Clients</span>
+        <h3 class="persona-h3">Find your barber. Right now.</h3>
+        <p class="persona-p">See who's actually free nearby, real prices, real reviews — book in seconds.</p>
+        <div class="mockup-wrap">
+          <img src="assets/mock_client.png" alt="FADED client view" loading="lazy">
+          <div class="mockup-notch"></div>
         </div>
       </div>
     </div>
-
-    <!-- Subtle access link for barbers / invited testers -->
-    <div style="text-align:center">
-      <a href="#" onclick="showAccessModal();return false;" class="app-access-link">
-        Already have access? Enter the app <span class="arrow">→</span>
-      </a>
+    <!-- Barber -->
+    <div style="perspective:1400px">
+      <div class="persona-card" data-tilt="barber">
+        <span class="persona-badge" style="background:rgba(245,158,11,0.15);color:#F59E0B;border:1px solid rgba(245,158,11,0.35)">For Barbers</span>
+        <h3 class="persona-h3">Your chair. Your rules.</h3>
+        <p class="persona-p">Go online instantly, set your own price, and keep 100% of every cut.</p>
+        <div class="mockup-wrap">
+          <img src="assets/mock_barber.png" alt="FADED barber view" loading="lazy">
+          <div class="mockup-notch"></div>
+        </div>
+        <div class="barber-toggle-wrap">
+          <div class="barber-toggle-row">
+            <span class="barber-toggle-label">Try it — go online</span>
+            <div class="toggle-switch" id="barber-toggle" style="background:#22C55E" onclick="toggleBarber()">
+              <div class="toggle-thumb" id="toggle-thumb" style="transform:translateX(20px)"></div>
+            </div>
+          </div>
+          <div class="barber-status" id="barber-status" style="color:#22C55E">● Online — clients can find and book you right now.</div>
+        </div>
+      </div>
     </div>
-
+    <!-- Shop Owner -->
+    <div style="perspective:1400px">
+      <div class="persona-card" data-tilt="shop">
+        <span class="persona-badge" style="background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.35)">For Shop Owners</span>
+        <h3 class="persona-h3">Every cut, every day, tracked.</h3>
+        <p class="persona-p">Walk-in queues, schedules, and daily revenue — all in one dashboard.</p>
+        <div class="mockup-wrap">
+          <img src="assets/mock_shop.png" alt="FADED shop owner view" loading="lazy">
+          <div class="mockup-notch"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section style="background:#080808;border-top:1px solid #111">
-  <div class="section">
-    <div class="section-label">HOW IT WORKS</div>
-    <div class="fade-divider"></div>
-    <h2 class="section-title">THREE TAPS.<br>FRESH CUT.</h2>
-    <div class="steps">
+<section id="how">
+  <div class="how-inner reveal" data-reveal>
+    <div class="section-eyebrow" style="color:#3B6CF7">How It Works</div>
+    <h2 class="section-h2">Open. See. Book.</h2>
+    <div class="steps-grid">
+      <div class="steps-line"></div>
       <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-icon">📍</div>
-        <div class="step-title">Open FAD<span style="color:#2563EB">ED</span></div>
-        <div class="step-desc">Your GPS finds available barbers near you in real time. Closest and most available show up first.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-icon">✂️</div>
-        <div class="step-title">Pick Your Barber</div>
-        <div class="step-desc">Browse profiles, portfolio photos, ratings and specialties. Tap to see who's ready for you right now.</div>
+        <div class="step-num" style="border:1px solid rgba(59,108,247,0.4);box-shadow:0 0 0 6px #0C0C10,0 0 30px -6px rgba(59,108,247,0.6);color:#3B6CF7">01</div>
+        <h3 class="step-h3">Open the app</h3>
+        <p class="step-p">See every barber live near you on the map — no calls, no DMs.</p>
       </div>
       <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-icon">⚡</div>
-        <div class="step-title">Book Instantly</div>
-        <div class="step-desc">Confirm your booking in seconds. No calls. No DMs. No waiting on read receipts.</div>
+        <div class="step-num" style="border:1px solid rgba(245,158,11,0.4);box-shadow:0 0 0 6px #0C0C10,0 0 30px -6px rgba(245,158,11,0.6);color:#F59E0B">02</div>
+        <h3 class="step-h3">Pick a real time slot</h3>
+        <p class="step-p">Live availability, real prices upfront — book it and it's confirmed.</p>
+      </div>
+      <div class="step">
+        <div class="step-num" style="border:1px solid rgba(34,197,94,0.4);box-shadow:0 0 0 6px #0C0C10,0 0 30px -6px rgba(34,197,94,0.6);color:#22C55E">03</div>
+        <h3 class="step-h3">Show up, get faded</h3>
+        <p class="step-p">Flash your boarding pass at the chair. That's the whole flow.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOR BARBERS -->
-<section id="barbers" class="barber-section">
-  <div class="section" style="padding-top:100px;padding-bottom:100px">
-    <div class="section-label">FOR BARBERS</div>
-    <div class="fade-divider"></div>
-    <h2 class="section-title" style="margin-bottom:16px">YOUR CHAIR.<br>YOUR RULES.</h2>
-    <p style="text-align:center;color:#4B7AC7;font-size:16px;max-width:480px;margin:0 auto 48px;line-height:1.7">Go live when you're ready. Get booked instantly. Keep every dollar — FADED takes zero commission.</p>
+<!-- WHY FADED -->
+<section id="why">
+  <div class="why-bloom"></div>
+  <div class="reveal" data-reveal>
+    <div class="section-eyebrow" style="color:#F59E0B">The Difference</div>
+    <h2 class="section-h2">Why barbers actually keep FADED.</h2>
+  </div>
 
-    <!-- Founding Barbers Offer -->
-    <div class="founding-banner">
-      <div class="founding-badge"><div class="badge-dot"></div> Founding Barbers — Limited Spots</div>
-      <h3 class="founding-title">2 MONTHS.<br><span>ON US.</span></h3>
-      <p class="founding-sub">Be one of the <strong>first 20 barbers</strong> to join FADED and get your first 2 months completely free — no credit card, no contract. Show up at launch already ahead of the competition. Your clients book you. You keep everything.</p>
-      <div class="founding-counter">
-        <p class="founding-spots"><em id="barber-spots-taken">—</em> of 20 founding spots claimed</p>
-        <div class="founding-bar"><div class="founding-bar-fill" id="founding-bar-fill" style="width:0%"></div></div>
+  <!-- Row 1: Pricing + Calculator -->
+  <div class="why-row">
+    <div class="why-text">
+      <div class="why-eyebrow" style="color:#3B6CF7">01 — Pricing</div>
+      <h3 class="why-h3">Zero commission. Flat $30/mo.</h3>
+      <p class="why-p">Commission-based apps quietly take 20–30% off every single cut. FADED charges barbers one flat monthly rate — and takes 0% of what they earn in the chair.</p>
+    </div>
+    <div class="calc-card">
+      <div class="calc-header">
+        <span class="calc-cuts-label">Your cuts / month</span>
+        <span class="calc-cuts-val" id="cuts-display">120</span>
       </div>
-      <a href="#" onclick="scrollToTop('barber');return false;" class="founding-cta" style="font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:0;font-style:normal">
-        ⭐ Claim Your Founding Spot →
-      </a>
-      <p class="founding-note" style="font-family:'DM Sans',sans-serif">No credit card. No contract. First 2 months free — then just $30/month flat. Zero commission on your earnings, forever.</p>
-    </div>
-
-    <div class="perks">
-      <div class="perk"><div class="perk-icon">🟢</div><div class="perk-title">Go Live Instantly</div><div class="perk-desc">Toggle your status and clients near you see you immediately. Available, busy, or offline — you control it in real time.</div></div>
-      <div class="perk"><div class="perk-icon">💰</div><div class="perk-title">Keep 100%</div><div class="perk-desc">Zero commission on your earnings — ever. First 2 months free, then $30/month flat. We never take a cut of what you make.</div></div>
-      <div class="perk"><div class="perk-icon">📅</div><div class="perk-title">Full Schedule</div><div class="perk-desc">App bookings come in automatically. Add phone and walk-in clients manually. One place for your entire day.</div></div>
-      <div class="perk"><div class="perk-icon">🔗</div><div class="perk-title">Your Booking Link</div><div class="perk-desc">Get a personal link like letsgetfaded.com/barber/yourname — share it on Instagram, WhatsApp, business cards.</div></div>
-      <div class="perk perk-locked"><div class="perk-icon">🔒</div><div class="perk-title">More at Launch</div><div class="perk-desc">Founding barbers unlock tools no other booking app has. You'll see them first.</div></div>
-    </div>
-    <div style="text-align:center;margin-top:56px">
-      <a href="#" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="scrollToTop('barber');return false;">Join as a Barber — Early Access</a>
-      <p style="margin-top:16px;font-size:13px;color:#2a3d5c">No credit card. No contract. No commission.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<div class="features">
-  <div style="max-width:900px;margin:0 auto;padding:80px 24px 0">
-    <div class="section-label">WHY FADED</div>
-    <div class="fade-divider"></div>
-    <h2 class="section-title" style="margin-bottom:0">BUILT DIFFERENT.</h2>
-  </div>
-  <div style="max-width:900px;margin:32px auto 0;padding:0 24px 80px">
-    <div class="feature-grid" style="border:1px solid #1a1a1a;border-radius:20px;overflow:hidden">
-      <div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Real-Time Availability</div><div class="feature-desc">Not just scheduling — see who is literally free right now. Barbers toggle their status live so you always see accurate availability.</div></div>
-      <div class="feature"><div class="feature-icon">📍</div><div class="feature-title">GPS-Powered Discovery</div><div class="feature-desc">Your location finds the closest available barber automatically. Sorted by distance and availability — not by who paid to be featured.</div></div>
-      <div class="feature"><div class="feature-icon">🔔</div><div class="feature-title">Waitlist Notifications</div><div class="feature-desc">Slot fully booked? Join the waitlist. The moment someone cancels, you get an instant notification — with 15 minutes to claim it.</div></div>
-      <div class="feature"><div class="feature-icon">🚶</div><div class="feature-title">Walk-In Mode</div><div class="feature-desc">See which barbers are open for walk-ins right now. Just show up — no booking required.</div></div>
-      <div class="feature"><div class="feature-icon">🎁</div><div class="feature-title">Gift a Haircut</div><div class="feature-desc">Send a digital gift card via SMS or email. The perfect gift — redeemable at any booking.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- VS SECTION -->
-<section style="background:#080808;border-top:1px solid #111">
-  <div class="section" style="padding-top:80px;padding-bottom:80px">
-    <div class="section-label">THE DIFFERENCE</div>
-    <div class="fade-divider"></div>
-    <h2 class="section-title" style="margin-bottom:48px">FADED VS THE REST.</h2>
-    <div class="vs-grid">
-      <div class="vs-col">
-        <div class="vs-header faded">✂️ FADED</div>
-        <div class="vs-row"><span style="color:#F5F5F0">Live availability</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">GPS-sorted results</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">Walk-in mode</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">Zero booking fees</span><span class="vs-check">✓</span></div>
-        <div class="vs-row"><span style="color:#F5F5F0">No app download needed</span><span class="vs-check">✓</span></div>
+      <input type="range" id="cuts-slider" min="20" max="400" step="10" value="120">
+      <div class="calc-row other">
+        <span class="calc-row-label">Commission app (~25%)</span>
+        <span class="calc-row-val" id="commission-cost">-$1,350/mo</span>
       </div>
-      <div class="vs-col">
-        <div class="vs-header them">Everyone else</div>
-        <div class="vs-row"><span style="color:#333">Live availability</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">GPS-sorted results</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">Walk-in mode</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">Zero booking fees</span><span class="vs-x">✗</span></div>
-        <div class="vs-row"><span style="color:#333">No app download needed</span><span class="vs-x">✗</span></div>
+      <div class="calc-row faded">
+        <span class="calc-row-label">FADED (flat)</span>
+        <span class="calc-row-val">-$30/mo</span>
+      </div>
+      <div class="calc-savings" id="calc-savings">You keep $1,320 more / mo</div>
+    </div>
+  </div>
+
+  <!-- Row 2: Discovery -->
+  <div class="why-row rev">
+    <div class="ping-card">
+      <div class="ping-grid"></div>
+      <div class="ping-dot">
+        <div class="ping-ring"></div>
+        <div class="ping-ring ping-ring-2"></div>
+      </div>
+    </div>
+    <div class="why-text">
+      <div class="why-eyebrow" style="color:#3B6CF7">02 — Discovery</div>
+      <h3 class="why-h3">GPS live discovery.</h3>
+      <p class="why-p">No DMs, no dead-end phone calls. See who's genuinely available near you, right now, updated live on the map.</p>
+    </div>
+  </div>
+
+  <!-- Row 3: Tax -->
+  <div class="why-row">
+    <div class="why-text">
+      <div class="why-eyebrow" style="color:#F59E0B">03 — Tax Tools</div>
+      <h3 class="why-h3">Built-in HST / GST / QST.</h3>
+      <p class="why-p">FADED auto-calculates the right tax per province, tracks revenue against CRA registration thresholds, and warns barbers before they're required to register. No other platform offers this.</p>
+    </div>
+    <div class="tax-card">
+      <div class="tax-badges">
+        <span class="tax-badge">HST</span>
+        <span class="tax-badge">GST</span>
+        <span class="tax-badge">QST</span>
+      </div>
+      <div class="tax-row">
+        <span class="tax-dot"></span>
+        <p class="tax-p">You're approaching the $30,000 CRA registration threshold. We'll help you register before it's a problem.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="cta-section">
-  <div class="cta-title" style="position:relative">READY WHEN<br><span class="blue">WE ARE?</span></div>
-  <p style="font-size:17px;color:#333;margin-bottom:40px;position:relative">Be first in line when FADED launches.</p>
-  <div style="position:relative">
-    <a href="#" class="btn-primary" style="font-size:16px;padding:18px 48px" onclick="scrollToTop();return false;">✂️ Join the Waitlist</a>
+<!-- STORY -->
+<section id="story">
+  <div class="story-bloom"></div>
+  <div class="story-inner reveal" data-reveal>
+    <div class="story-text">
+      <div class="section-eyebrow" style="color:#3B6CF7;text-align:left">Why FADED Exists</div>
+      <p class="story-p">I've been thinking about this for almost ten years. Back in 2017, I sent myself an email with an idea I couldn't shake: what if finding a good barber was as easy as opening an app and seeing who was actually free, right now, near you? Not scrolling through Instagram DMs. Not calling five shops and getting no answer. Just — open, see, book.</p>
+      <p class="story-p">For years it stayed exactly that: an idea. Then in early 2026, I finally sat down and built it. Four months later, FADED was live — across all of Canada, not just one city, because barbers everywhere deserve the same shot.</p>
+      <p class="story-p">This isn't a big VC-backed company trying to disrupt an industry. It's one guy who got tired of waiting, and built the thing he wished existed. Barbers keep 100% of what they earn. Clients find someone available in seconds. That's it. That's the whole idea.</p>
+      <div class="story-sig">— Kunal, Founder</div>
+    </div>
+    <div class="story-photo-wrap">
+      <div class="story-photo">
+        <img src="assets/founder_kunal.webp" alt="Kunal, Founder of FADED">
+      </div>
+    </div>
   </div>
-  <p style="margin-top:24px;font-size:12px;color:#1a1a1a;position:relative">letsgetfaded.com · Live Now in Canada 🇨🇦</p>
 </section>
 
-<!-- ACCESS CODE MODAL -->
-<div id="access-modal" style="display:none" class="access-modal-overlay" onclick="if(event.target===this)closeAccessModal()">
-  <div class="access-modal-box">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:4px;margin-bottom:6px">FAD<span style="color:#2563EB">ED</span></div>
-    <div style="height:1px;background:linear-gradient(90deg,transparent,#2563EB,transparent);margin-bottom:24px"></div>
-    <p style="color:#777;font-size:13px;margin-bottom:20px;line-height:1.6">Early access only.<br>Enter your invite code to continue.</p>
-    <input id="access-code-input" class="access-code-input" type="text" maxlength="10" placeholder="· · · · · ·" autocomplete="off" oninput="this.value=this.value.toUpperCase();document.getElementById('access-code-error').style.display='none';this.classList.remove('error')" onkeydown="if(event.key==='Enter')checkAccessCode()"/>
-    <div id="access-code-error" style="display:none;color:#EF4444;font-size:12px;margin-bottom:12px">Invalid code — check with the FADED team.</div>
-    <button onclick="checkAccessCode()" style="width:100%;padding:14px;background:#2563EB;border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;font-family:'Syne',sans-serif;margin-bottom:10px;transition:background .2s" onmouseover="this.style.background='#1D4ED8'" onmouseout="this.style.background='#2563EB'">Enter →</button>
-    <button onclick="closeAccessModal()" style="width:100%;padding:10px;background:transparent;border:none;color:#444;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:color .2s" onmouseover="this.style.color='#777'" onmouseout="this.style.color='#444'">Cancel</button>
+<!-- FAQ -->
+<section id="faq">
+  <div class="reveal" data-reveal>
+    <div class="section-eyebrow" style="color:#3B6CF7">FAQ</div>
+    <h2 class="section-h2" style="margin-bottom:60px">Good questions.</h2>
   </div>
-</div>
+  <div id="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(0)">Why isn't FADED commission-based like other platforms?<span class="faq-icon"></span></div>
+      <div class="faq-panel"><p class="faq-a">Because commissions punish busy barbers the most. FADED charges a flat $30/month instead — whether you do 5 cuts or 500, we take $0 of what you earn per cut.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(1)">Is this only available in my city?<span class="faq-icon"></span></div>
+      <div class="faq-panel"><p class="faq-a">FADED is built for every city and region in Canada from day one — it's not a one-city app. We're just getting started: our first founding barbers are live in Ontario now, with more joining every week as we expand coast to coast.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(2)">How do I know my barber is legit?<span class="faq-icon"></span></div>
+      <div class="faq-panel"><p class="faq-a">Every barber goes through verification before going live on the platform, regardless of formal licensing status. Licensed barbers can also display a "Licensed Barber" badge. You can see real ratings, cut counts, and reviews before you book.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(3)">How does payment work?<span class="faq-icon"></span></div>
+      <div class="faq-panel"><p class="faq-a">Payments run securely through Stripe. Barbers set their own price and keep 100% of it — FADED never takes a cut of any booking. Barbers pay one flat $30/month platform fee. Clients pay the listed price plus a small FADED fee and standard processing.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(4)">Is there a launch promo?<span class="faq-icon"></span></div>
+      <div class="faq-panel"><p class="faq-a">Yes. Clients get their first month completely fee-free. The first 20 barbers to join get 2 months free of the platform fee — every barber after that gets their first month free.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(5)">What if I need to cancel or reschedule?<span class="faq-icon"></span></div>
+      <div class="faq-panel"><p class="faq-a">Cancel or reschedule directly in the app with reasonable notice — no calls needed. Repeated no-shows are tracked to keep things fair for barbers and clients alike.</p></div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">FAD<span>ED</span></div>
-  <div class="footer-links">
-    <a href="#" onclick="scrollToTop();return false;">Join Waitlist</a>
-    <a href="#barbers">For Barbers</a>
-    <a href="mailto:hello@letsgetfaded.com">Contact</a>
-    <a href="#" onclick="showAccessModal();return false;">Try the App</a>
-    <a href="https://app.letsgetfaded.com/privacy">Privacy</a>
-    <a href="https://app.letsgetfaded.com/terms">Terms</a>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="fad">FAD</span><span class="ed">ED</span></div>
+      <p class="footer-tagline">Real-time barber booking, live across Canada.</p>
+    </div>
+    <div>
+      <div class="footer-col-head">Company</div>
+      <div class="footer-links">
+        <a href="#story">Our Story</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-head">Features</div>
+      <div class="footer-links">
+        <a href="#audiences">For Clients</a>
+        <a href="#audiences">For Barbers</a>
+        <a href="#why">Pricing</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-head">Legal</div>
+      <div class="footer-links">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-copy">© 2026 FADED · letsgetfaded.com</div>
+  <div class="footer-bottom">
+    <span>© <span id="footer-year"></span> FADED. Live across Canada.</span>
+    <a href="https://app.letsgetfaded.com" target="_blank" rel="noopener noreferrer">app.letsgetfaded.com →</a>
+  </div>
 </footer>
 
-<!-- Supabase CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d+q6itzKggCI9AKXL9FBMnSG4CqMm6THGRBXxYHi7x+VCz0fEGqyFEMm2ZN0rNpINGFb7PYZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-  // ── Supabase client (anon key — read/waitlist insert only) ──
-  const { createClient } = supabase;
-  const sb = createClient(
-    'https://qyjwfyboyijqiovtagby.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5andmeWJveWlqcWlvdnRhZ2J5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5Njg0ODksImV4cCI6MjA5MjU0NDQ4OX0.jl4TiGzfF9cwEYJeqxXP8FbP6hHi6qL3aDuC9zBMJKs'
-  );
+(function(){
+'use strict';
 
-  // ── Countdown ──
-  const LAUNCH_MIDNIGHT = new Date('2026-06-24T00:00:00');
-  function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
-  const prevVals = {};
+// ─── GLOBE SHARED RENDERER ───────────────────────────────────────────────────
+const CONTINENT_COORDS = [
+  [[70,-168],[71,-155],[70,-141],[69,-125],[62,-95],[58,-83],[52,-79],[46,-64],[44,-67],[41,-71],[36,-76],[31,-81],[26,-80],[25,-97],[19,-104],[16,-95],[12,-84],[8,-79],[9,-83],[14,-92],[18,-103],[23,-110],[28,-115],[32,-117],[34,-120],[38,-123],[43,-124],[48,-125],[54,-133],[58,-136],[60,-142],[64,-152],[68,-163],[70,-168]],
+  [[8,-77],[6,-73],[2,-67],[-3,-52],[-5,-42],[-8,-35],[-13,-39],[-20,-40],[-23,-43],[-27,-49],[-33,-53],[-38,-58],[-42,-65],[-45,-70],[-40,-73],[-33,-71],[-25,-70],[-18,-70],[-12,-77],[-4,-81],[2,-79],[8,-77]],
+  [[36,-9],[38,-9],[40,-9],[43,-8],[43,-2],[41,3],[38,15],[37,17],[36,15],[35,10],[32,20],[31,25],[31,32],[27,34],[22,37],[18,38],[12,43],[11,51],[2,45],[-5,40],[-11,40],[-18,35],[-22,35],[-26,32],[-30,29],[-34,19],[-34,18],[-29,17],[-23,14],[-18,12],[-10,13],[-4,9],[4,9],[10,10],[15,15],[20,16],[25,15],[30,10],[32,-2],[35,-6],[36,-9]],
+  [[71,-9],[70,5],[70,25],[68,33],[65,35],[60,30],[59,24],[57,10],[54,20],[52,25],[47,30],[45,36],[42,40],[38,40],[36,28],[38,15],[41,3],[43,-2],[43,-8],[40,-9],[38,-9],[36,-9],[38,-6],[43,-9],[48,-2],[52,3],[58,7],[63,10],[67,15],[71,-9]],
+  [[70,60],[71,80],[72,100],[73,130],[70,150],[68,170],[64,177],[60,170],[58,158],[53,142],[46,138],[43,132],[38,128],[35,126],[33,130],[31,121],[29,122],[24,120],[22,113],[20,110],[16,108],[10,105],[7,100],[6,95],[8,93],[12,92],[14,80],[17,73],[20,63],[24,55],[27,50],[24,60],[28,65],[33,60],[38,60],[42,55],[48,50],[52,55],[57,58],[62,55],[66,58],[70,60]],
+  [[-10,113],[-9,120],[-8,125],[-9,130],[-3,133],[-2,140],[-5,145],[-9,142],[-14,144],[-18,146],[-24,153],[-28,153],[-32,152],[-35,150],[-38,147],[-38,144],[-37,140],[-35,138],[-34,135],[-32,133],[-32,128],[-34,123],[-33,118],[-31,115],[-25,113],[-20,113],[-15,113],[-10,113]]
+];
 
-  let liveMode = false;
+function sph(lat,lon){const la=lat*Math.PI/180,lo=lon*Math.PI/180;return[Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)]}
+function subdivide(poly,steps){const out=[];for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length];for(let s=0;s<steps;s++){const f=s/steps,e=f*f*(3-2*f);out.push([a[0]+(b[0]-a[0])*e,a[1]+(b[1]-a[1])*e])}}return out}
+function rotY(p,a){const c=Math.cos(a),s=Math.sin(a);return[p[0]*c+p[2]*s,p[1],-p[0]*s+p[2]*c]}
+function rotX(p,a){const c=Math.cos(a),s=Math.sin(a);return[p[0],p[1]*c-p[2]*s,p[1]*s+p[2]*c]}
+function proj(p,cx,cy,sc){const pe=2.6/(2.6-p[2]);return[cx+p[0]*sc*pe,cy-p[1]*sc*pe,p[2]]}
 
-  function goLive() {
-    if (liveMode) return;
-    liveMode = true;
+// ─── INTRO GLOBE ─────────────────────────────────────────────────────────────
+var introGlobe = null;
+function startIntroGlobe(){
+  var canvas = document.getElementById('intro-canvas');
+  if(!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+  function resize(){W=window.innerWidth;H=window.innerHeight;canvas.width=W*DPR;canvas.height=H*DPR;canvas.style.width=W+'px';canvas.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0)}
+  window.addEventListener('resize',resize);resize();
 
-    // Swap countdown to a live pulse badge
-    document.getElementById('countdown').innerHTML = `
-      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.35);padding:12px 28px;border-radius:20px">
-        <div style="width:9px;height:9px;border-radius:50%;background:#22C55E;box-shadow:0 0 10px #22C55E;flex-shrink:0"></div>
-        <span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:#22C55E;letter-spacing:2.5px">LIVE NOW</span>
-      </div>`;
+  var continents = CONTINENT_COORDS.map(p=>subdivide(p,10).map(([la,lo])=>sph(la,lo)));
+  var gridLines=[];
+  for(var la=-60;la<=60;la+=30){var pts=[];for(var lo=0;lo<=360;lo+=6)pts.push(sph(la,lo));gridLines.push(pts)}
+  for(var lo2=0;lo2<360;lo2+=30){var pts2=[];for(var la2=-90;la2<=90;la2+=6)pts2.push(sph(la2,lo2));gridLines.push(pts2)}
 
-    // Update hero subtitle
-    const sub = document.querySelector('.hero-sub');
-    if (sub) sub.innerHTML = 'FADED is here. Find your barber. <em>Book in seconds.</em>';
+  var NC=20;
+  var nodes=[];for(var i=0;i<NC;i++)nodes.push(sph((Math.random()*140-70),(Math.random()*360)));
+  var arcs=[];for(var i2=0;i2<14;i2++){var a=Math.floor(Math.random()*NC),b=Math.floor(Math.random()*NC);if(a!==b)arcs.push({a,b,phase:Math.random()*Math.PI*2,speed:0.6+Math.random()*0.8})}
 
-    // Update status line
-    const status = document.querySelector('.hero-status');
-    if (status) status.innerHTML = `
-      <div style="width:8px;height:8px;border-radius:50%;background:#22C55E;box-shadow:0 0 8px #22C55E;flex-shrink:0"></div>
-      <span class="s-text-live" style="color:#22C55E;letter-spacing:.18em">We're live — book your barber right now</span>`;
-
-    // Swap the waitlist form for a live CTA
-    const formState = document.getElementById('form-state');
-    if (formState) formState.innerHTML = `
-      <a href="https://app.letsgetfaded.com"
-         style="display:block;padding:18px 40px;background:#2563EB;border-radius:16px;color:#fff;font-family:'Syne',sans-serif;font-size:18px;font-weight:800;text-decoration:none;letter-spacing:1px;text-align:center;transition:background 0.2s;margin-bottom:14px"
-         onmouseover="this.style.background='#1D4ED8'"
-         onmouseout="this.style.background='#2563EB'">
-        ✂️ Book Your Barber Now →
-      </a>
-      <p style="font-size:12px;color:#555;text-align:center;margin:0">No app download needed · Works on any phone</p>`;
-  }
-
-  function tick() {
-    const now = Date.now();
-    const remaining = LAUNCH_MIDNIGHT - now;
-    if (remaining <= 0) { goLive(); return; }
-    const days  = Math.floor(remaining / 86400000);
-    const hours = Math.floor((remaining % 86400000) / 3600000);
-    const mins  = Math.floor((remaining % 3600000)  / 60000);
-    const secs  = Math.floor((remaining % 60000)    / 1000);
-
-    [['cd-days',days],['cd-hours',hours],['cd-mins',mins],['cd-secs',secs]].forEach(([id,val]) => {
-      const el = document.getElementById(id);
-      const str = pad(val);
-      if (el.textContent !== str) {
-        el.classList.add('flip');
-        el.textContent = str;
-        setTimeout(() => el.classList.remove('flip'), 150);
-      }
-    });
-  }
-  tick();
-  setInterval(tick, 1000);
-
-  // ── Role toggle ──
-  let currentRole = 'client';
-  function setRole(role) {
-    currentRole = role;
-    document.getElementById('role-client').classList.toggle('active', role === 'client');
-    document.getElementById('role-barber').classList.toggle('active', role === 'barber');
-    var fi = document.getElementById('founding-inline');
-    if (fi) fi.style.display = role === 'barber' ? 'flex' : 'none';
-  }
-
-  // ── Waitlist count ──
-  async function loadCount() {
-    const { count } = await sb.from('waitlist_signups').select('*', { count:'exact', head:true });
-    if (count > 0) {
-      document.getElementById('count-text').textContent = `${count} ${count === 1 ? 'person' : 'people'} already on the list`;
-      document.getElementById('signup-count').style.display = 'inline-flex';
-    }
-  }
-  loadCount();
-
-  // ── Founding barber spot counter — real-time ──
-  var _barberCount = 0;
-
-  function applyFoundingBar(count, animate) {
-    var taken = Math.min(count, 20);
-    _barberCount = count;
-    var spotsEl = document.getElementById('barber-spots-taken');
-    var barFill = document.getElementById('founding-bar-fill');
-    if (spotsEl) spotsEl.textContent = taken;
-    if (barFill) {
-      if (animate) {
-        setTimeout(function() { barFill.style.width = (taken / 20 * 100) + '%'; }, 80);
-      } else {
-        barFill.style.width = (taken / 20 * 100) + '%';
-      }
-    }
-    // Keep inline form counter in sync
-    var inlineTaken = document.getElementById('inline-spots-taken');
-    var inlineLeft  = document.getElementById('inline-spots-left');
-    if (inlineTaken) inlineTaken.textContent = taken;
-    if (inlineLeft)  inlineLeft.textContent  = Math.max(0, 20 - taken);
-  }
-
-  async function loadBarberCount() {
-    // RPC bypasses RLS — direct table query was silently blocked by anon SELECT policy
-    const { data } = await sb.rpc('get_barber_waitlist_count');
-    applyFoundingBar(data || 0, true);
-  }
-  loadBarberCount();
-
-  // Real-time: bar moves up instantly when a new barber joins the waitlist
-  sb.channel('founding-barbers-live')
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'waitlist_signups', filter: 'role=eq.barber' }, function() {
-      applyFoundingBar(_barberCount + 1, true);
-    })
-    .on('postgres_changes', { event: 'DELETE', schema: 'public', table: 'waitlist_signups' }, function() {
-      loadBarberCount();
-    })
-    .subscribe();
-
-  // ── Join waitlist ──
-  async function joinWaitlist() {
-    const email = document.getElementById('input-email').value.trim();
-    const name  = document.getElementById('input-name').value.trim();
-    const msg   = document.getElementById('form-msg');
-    msg.textContent = '';
-
-    if (!name) {
-      msg.className = 'form-error';
-      msg.textContent = 'Please enter your first name.';
-      document.getElementById('input-name').focus();
-      return;
-    }
-
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      msg.className = 'form-error';
-      msg.textContent = 'Please enter a valid email address.';
-      return;
-    }
-
-    const btn = document.getElementById('submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Joining...';
-
-    const { error } = await sb.from('waitlist_signups').insert({ email, name, role: currentRole });
-
-    if (error) {
-      btn.disabled = false;
-      btn.textContent = 'Notify Me →';
-      if (error.code === '23505') {
-        msg.className = 'already-msg';
-        msg.textContent = "You're already on the list — we'll see you at launch! 🎉";
-      } else {
-        msg.className = 'form-error';
-        msg.textContent = 'Something went wrong. Try again.';
-      }
-      return;
-    }
-
-    // Email sent by DB trigger (on_waitlist_signup → notify_waitlist_signup)
-
-    // Show success
-    const shareText = encodeURIComponent("I just joined FADED — real-time barber booking, live now in Canada. Find a barber near you instantly 💈");
-    const shareUrl  = encodeURIComponent("https://letsgetfaded.com");
-    document.getElementById('share-twitter').href  = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
-    document.getElementById('share-whatsapp').href = `https://wa.me/?text=${shareText}%20${shareUrl}`;
-
-    const isBarber = currentRole === 'barber';
-    document.getElementById('success-msg').textContent = isBarber
-      ? `You're on the early access list as a barber, ${name}. We'll reach out before launch to get your profile set up. 💈`
-      : `We'll email you, ${name}, the moment we go live. You're early — that means something. ✂️`;
-
-    document.getElementById('form-state').style.display   = 'none';
-    document.getElementById('success-state').style.display = 'block';
-    loadCount();
-  }
-
-  // Enter key submits waitlist form
-  document.getElementById('input-name').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('input-email').focus(); });
-  document.getElementById('input-email').addEventListener('keydown', e => { if (e.key === 'Enter') joinWaitlist(); });
-
-  // Scroll to top and focus form
-  function scrollToTop(role) {
-    if (role) setRole(role);
-    const target = document.getElementById('input-name');
-    if (target) {
-      const y = target.getBoundingClientRect().top + window.scrollY - 100;
-      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    setTimeout(() => { document.getElementById('input-name').focus(); }, 500);
-  }
-
-  // ── ACCESS CODE MODAL ──
-  const ACCESS_CODE = 'FADED26';
-
-  function showAccessModal() {
-    const el = document.getElementById('access-modal');
-    el.style.display = 'flex';
-    setTimeout(() => document.getElementById('access-code-input').focus(), 100);
-  }
-  function closeAccessModal() {
-    document.getElementById('access-modal').style.display = 'none';
-    document.getElementById('access-code-input').value = '';
-    document.getElementById('access-code-error').style.display = 'none';
-    document.getElementById('access-code-input').classList.remove('error');
-  }
-  function checkAccessCode() {
-    const input = document.getElementById('access-code-input');
-    const code = input.value.trim().toUpperCase();
-    if (code === ACCESS_CODE) {
-      window.location.href = 'https://www.app.letsgetfaded.com?beta=1';
-    } else {
-      input.classList.add('error');
-      document.getElementById('access-code-error').style.display = 'block';
-      setTimeout(() => input.classList.remove('error'), 400);
-    }
-  }
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeAccessModal();
+  var pingNames=['Marcus — Toronto','Priya — Ottawa','Devon — Belleville'];
+  var usedNodes=[];
+  var pings=[0.3,1.6,2.9].map((start,i)=>{
+    var idx;do{idx=Math.floor(Math.random()*NC)}while(usedNodes.indexOf(idx)!==-1);
+    usedNodes.push(idx);return{node:idx,name:pingNames[i%pingNames.length],start,dur:1.1}
   });
 
-  // Copy link
-  function copyLink() {
-    navigator.clipboard.writeText('https://letsgetfaded.com').then(() => {
-      const btn = document.getElementById('copy-btn');
-      btn.textContent = '✓ Copied!';
-      setTimeout(() => btn.textContent = '🔗 Copy Link', 2000);
-    });
-  }
+  var t0=performance.now(),active=true,raf;
+  function draw(now){
+    if(!active)return;
+    var t=(now-t0)/1000;
+    var cx=W/2,cy=H/2;
+    var alpha=1;
+    if(t>3.5&&t<=4.2)alpha=1-(t-3.5)/0.7;else if(t>4.2)alpha=0;
+    var zT=Math.min(1,t/3.5),zE=1-Math.pow(1-zT,2);
+    var zoom=0.8+zE*0.4;
+    if(t>3.3)zoom+=Math.min(1,(t-3.3)/0.2)*0.22;
+    var sc=Math.min(W,H)*0.24*zoom;
+    ctx.clearRect(0,0,W,H);
+    if(alpha>0){
+      ctx.globalAlpha=alpha;
+      var rot=t*0.15+(t>3.3?Math.pow((t-3.3)/0.85,2)*1.6:0);
+      var sg=ctx.createRadialGradient(cx-sc*0.3,cy-sc*0.35,sc*0.1,cx,cy,sc*1.05);
+      sg.addColorStop(0,'rgba(59,108,247,0.28)');sg.addColorStop(0.55,'rgba(18,20,32,0.9)');sg.addColorStop(1,'rgba(12,12,16,0.95)');
+      ctx.beginPath();ctx.arc(cx,cy,sc*1.01,0,Math.PI*2);ctx.fillStyle=sg;ctx.fill();
+      ctx.beginPath();ctx.arc(cx,cy,sc*1.01,0,Math.PI*2);ctx.strokeStyle='rgba(59,108,247,0.5)';ctx.lineWidth=1.4;ctx.stroke();
 
-  // ── BACKGROUND MUSIC ──
-  const bgAudio = new Audio(encodeURI('Drake Future Raul Apxpei Ran To Atlanta Instrumental.mp3'));
-  bgAudio.loop = true;
-  bgAudio.volume = 0.18;
-  bgAudio.muted = true;
+      continents.forEach(poly=>{
+        var vis=0;
+        var pts2d=poly.map(p=>{var r=rotX(rotY(p,rot),0.35);if(r[2]>-0.1)vis++;return proj(r,cx,cy,sc)});
+        if(vis<poly.length*0.6)return;
+        ctx.beginPath();
+        var n=pts2d.length;
+        ctx.moveTo((pts2d[0][0]+pts2d[1][0])/2,(pts2d[0][1]+pts2d[1][1])/2);
+        for(var ii=1;ii<=n;ii++){var cur=pts2d[ii%n],nxt=pts2d[(ii+1)%n];ctx.quadraticCurveTo(cur[0],cur[1],(cur[0]+nxt[0])/2,(cur[1]+nxt[1])/2)}
+        ctx.closePath();ctx.fillStyle='rgba(120,140,170,0.16)';ctx.fill();
+        ctx.strokeStyle='rgba(160,180,210,0.22)';ctx.lineWidth=0.8;ctx.stroke();
+      });
 
-  const PLAY_ICON  = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-  const PAUSE_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6zm8-14v14h4V5z"/></svg>';
+      gridLines.forEach(line=>{
+        ctx.beginPath();var first=true;
+        line.forEach(p=>{var r=rotX(rotY(p,rot),0.35);if(r[2]<-0.15){first=true;return}var pp=proj(r,cx,cy,sc);if(first){ctx.moveTo(pp[0],pp[1]);first=false}else ctx.lineTo(pp[0],pp[1])});
+        ctx.strokeStyle='rgba(59,108,247,0.16)';ctx.lineWidth=1;ctx.stroke();
+      });
 
-  function updateMusicBtn() {
-    const btn = document.getElementById('music-toggle');
-    if (!btn) return;
-    const playing = !bgAudio.paused && !bgAudio.muted;
-    btn.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
-    btn.title = playing ? 'Pause music' : 'Play music';
-    btn.style.opacity = playing ? '1' : '0.55';
-  }
+      var pn=nodes.map(p=>{var r=rotX(rotY(p,rot),0.35);var pp=proj(r,cx,cy,sc);return{x:pp[0],y:pp[1],z:r[2],vis:r[2]>-0.2}});
+      arcs.forEach(arc=>{
+        var na=pn[arc.a],nb=pn[arc.b];if(!na||!nb||!na.vis||!nb.vis)return;
+        var mx=(na.x+nb.x)/2,my=(na.y+nb.y)/2-40;
+        ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.quadraticCurveTo(mx,my,nb.x,nb.y);
+        ctx.strokeStyle='rgba(59,108,247,0.4)';ctx.lineWidth=1.2;ctx.stroke();
+        var pg=(Math.sin(t*arc.speed+arc.phase)+1)/2;
+        var px=(1-pg)*(1-pg)*na.x+2*(1-pg)*pg*mx+pg*pg*nb.x;
+        var py=(1-pg)*(1-pg)*na.y+2*(1-pg)*pg*my+pg*pg*nb.y;
+        ctx.beginPath();ctx.arc(px,py,2.4,0,Math.PI*2);
+        ctx.fillStyle='#3B6CF7';ctx.shadowColor='#3B6CF7';ctx.shadowBlur=8;ctx.fill();ctx.shadowBlur=0;
+      });
+      pn.forEach(n=>{
+        if(!n.vis)return;var al=Math.max(0.2,Math.min(1,(n.z+1)/1.3));
+        ctx.beginPath();ctx.arc(n.x,n.y,2.6,0,Math.PI*2);ctx.fillStyle='rgba(245,158,11,'+al*0.95+')';
+        ctx.shadowColor='#F59E0B';ctx.shadowBlur=6;ctx.fill();ctx.shadowBlur=0;
+      });
 
-  function toggleMusic(e) {
-    e.stopPropagation();
-    if (bgAudio.paused) {
-      bgAudio.muted = false;
-      bgAudio.play().then(updateMusicBtn).catch(() => {});
-    } else {
-      bgAudio.pause();
-      updateMusicBtn();
+      pings.forEach(ping=>{
+        var n=pn[ping.node];if(!n||!n.vis)return;
+        var lt=t-ping.start;if(lt<0||lt>ping.dur)return;
+        var pa=lt<0.18?lt/0.18:(lt>ping.dur-0.28?Math.max(0,(ping.dur-lt)/0.28):1);
+        var rise=Math.min(1,lt/0.18)*10;
+        var bx=n.x,by=Math.max(n.y-16-rise,148);
+        ctx.save();ctx.globalAlpha=alpha*pa;
+        var sp=1+Math.max(0,(1-lt/0.18))*0.35;
+        ctx.font='700 '+(16*sp)+'px DM Sans,sans-serif';
+        var tw=ctx.measureText(ping.name).width;
+        var pX=14,dR=4.5,gap=9;
+        var bW=(tw+pX*2+dR*2+gap)*sp,bH=34*sp;
+        var bL=bx-bW/2,bT=by-bH-14;
+        var rr=17*sp;
+        ctx.beginPath();ctx.moveTo(bL+rr,bT);ctx.arcTo(bL+bW,bT,bL+bW,bT+bH,rr);ctx.arcTo(bL+bW,bT+bH,bL,bT+bH,rr);ctx.arcTo(bL,bT+bH,bL,bT,rr);ctx.arcTo(bL,bT,bL+bW,bT,rr);ctx.closePath();
+        ctx.fillStyle='rgba(10,10,14,0.95)';ctx.shadowColor='rgba(59,108,247,0.5)';ctx.shadowBlur=18;ctx.fill();ctx.shadowBlur=0;
+        ctx.strokeStyle='rgba(34,197,94,0.55)';ctx.lineWidth=1.5;ctx.stroke();
+        var dCx=bL+(pX+dR)*sp,dCy=bT+bH/2;
+        ctx.beginPath();ctx.arc(dCx,dCy,(dR+4)*(1+Math.sin(lt*6)*0.15),0,Math.PI*2);ctx.strokeStyle='rgba(34,197,94,0.4)';ctx.lineWidth=1.2;ctx.stroke();
+        ctx.beginPath();ctx.arc(dCx,dCy,dR*sp,0,Math.PI*2);ctx.fillStyle='#22C55E';ctx.shadowColor='#22C55E';ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+        ctx.font='700 '+(16*sp)+'px DM Sans,sans-serif';ctx.fillStyle='rgba(245,245,240,0.96)';ctx.textBaseline='middle';
+        ctx.fillText(ping.name,bL+(pX+dR*2+gap)*sp,dCy+0.5);
+        ctx.restore();
+      });
+      ctx.globalAlpha=1;
     }
+    if(t<4.3)raf=requestAnimationFrame(draw);
+  }
+  raf=requestAnimationFrame(draw);
+  introGlobe={stop:function(){active=false;if(raf)cancelAnimationFrame(raf);window.removeEventListener('resize',resize)}};
+}
+
+// ─── HERO GLOBE ──────────────────────────────────────────────────────────────
+var heroGlobeActive=false,heroRaf,heroT0;
+function startHeroGlobe(){
+  var canvas=document.getElementById('hero-canvas');
+  if(!canvas){requestAnimationFrame(startHeroGlobe);return}
+  var ctx=canvas.getContext('2d');
+  var W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+  function resize(){var rect=canvas.getBoundingClientRect();W=rect.width;H=rect.height;canvas.width=W*DPR;canvas.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
+  window.addEventListener('resize',resize);resize();
+
+  var continents=CONTINENT_COORDS.map(p=>subdivide(p,10).map(([la,lo])=>sph(la,lo)));
+  var NC=16,nodes=[];
+  for(var i=0;i<NC;i++)nodes.push({p:sph((Math.random()*140-70),(Math.random()*360)),online:Math.random()<0.4});
+  var arcs=[];
+  for(var i2=0;i2<11;i2++){var a=Math.floor(Math.random()*NC),b=Math.floor(Math.random()*NC);if(a!==b)arcs.push({a,b,phase:Math.random()*Math.PI*2,speed:0.6+Math.random()*0.8})}
+
+  heroT0=performance.now();heroGlobeActive=true;
+  function draw(now){
+    if(!heroGlobeActive)return;
+    var t=(now-heroT0)/1000;
+    var cx=W/2,cy=H/2;
+    var sc=Math.min(W,H)*0.34;
+    ctx.clearRect(0,0,W,H);
+    var rot=t*0.18;
+    ctx.beginPath();ctx.arc(cx,cy,sc,0,Math.PI*2);ctx.strokeStyle='rgba(59,108,247,0.35)';ctx.lineWidth=1;ctx.stroke();
+
+    continents.forEach(poly=>{
+      var vis=0;
+      var pts2d=poly.map(p=>{var r=rotX(rotY(p,rot),0.3);if(r[2]>-0.1)vis++;return proj(r,cx,cy,sc)});
+      if(vis<poly.length*0.6)return;
+      ctx.beginPath();var n=pts2d.length;
+      ctx.moveTo((pts2d[0][0]+pts2d[1][0])/2,(pts2d[0][1]+pts2d[1][1])/2);
+      for(var ii=1;ii<=n;ii++){var cur=pts2d[ii%n],nxt=pts2d[(ii+1)%n];ctx.quadraticCurveTo(cur[0],cur[1],(cur[0]+nxt[0])/2,(cur[1]+nxt[1])/2)}
+      ctx.closePath();ctx.fillStyle='rgba(120,140,170,0.14)';ctx.fill();
+    });
+
+    var pn=nodes.map(nd=>{var r=rotX(rotY(nd.p,rot),0.3);var pp=proj(r,cx,cy,sc);return{x:pp[0],y:pp[1],z:r[2],vis:r[2]>-0.2,online:nd.online}});
+    arcs.forEach(arc=>{
+      var na=pn[arc.a],nb=pn[arc.b];if(!na||!nb||!na.vis||!nb.vis)return;
+      var mx=(na.x+nb.x)/2,my=(na.y+nb.y)/2-24;
+      ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.quadraticCurveTo(mx,my,nb.x,nb.y);
+      ctx.strokeStyle='rgba(59,108,247,0.32)';ctx.lineWidth=1;ctx.stroke();
+    });
+    pn.forEach(n=>{
+      if(!n.vis)return;var al=Math.max(0.2,Math.min(1,(n.z+1)/1.3));
+      if(n.online){
+        var pu=1+Math.sin(t*2.4+n.x)*0.25;
+        ctx.beginPath();ctx.arc(n.x,n.y,5*pu,0,Math.PI*2);ctx.strokeStyle='rgba(34,197,94,'+al*0.35+')';ctx.lineWidth=1;ctx.stroke();
+        ctx.beginPath();ctx.arc(n.x,n.y,2.4,0,Math.PI*2);ctx.fillStyle='rgba(34,197,94,'+al+')';ctx.shadowColor='#22C55E';ctx.shadowBlur=5;ctx.fill();ctx.shadowBlur=0;
+      }else{
+        ctx.beginPath();ctx.arc(n.x,n.y,2.2,0,Math.PI*2);ctx.fillStyle='rgba(245,158,11,'+al*0.9+')';ctx.fill();
+      }
+    });
+    heroRaf=requestAnimationFrame(draw);
+  }
+  heroRaf=requestAnimationFrame(draw);
+}
+
+// ─── AUDIO ───────────────────────────────────────────────────────────────────
+var actx=null;
+function getACtx(){if(!actx)try{actx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}return actx}
+function playTone(freq,dur,type,gain){
+  var ctx=getACtx();if(!ctx)return;
+  if(ctx.state==='suspended')ctx.resume();
+  var osc=ctx.createOscillator(),g=ctx.createGain();
+  osc.type=type||'sine';osc.frequency.value=freq;
+  g.gain.setValueAtTime(0.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(gain||0.05,ctx.currentTime+0.01);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+dur);
+  osc.connect(g);g.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+dur+0.02);
+}
+function playClick(){playTone(720,0.09,'sine',0.04)}
+function playRiser(){
+  var ctx=getACtx();if(!ctx)return;if(ctx.state==='suspended')ctx.resume();
+  var osc=ctx.createOscillator(),g=ctx.createGain(),f=ctx.createBiquadFilter();
+  osc.type='sawtooth';osc.frequency.setValueAtTime(80,ctx.currentTime);osc.frequency.exponentialRampToValueAtTime(340,ctx.currentTime+1.45);
+  g.gain.setValueAtTime(0.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.05,ctx.currentTime+1.2);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+1.5);
+  f.type='lowpass';f.frequency.setValueAtTime(500,ctx.currentTime);f.frequency.exponentialRampToValueAtTime(4000,ctx.currentTime+1.45);
+  osc.connect(f);f.connect(g);g.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+1.55);
+}
+function playImpact(){
+  var ctx=getACtx();if(!ctx)return;if(ctx.state==='suspended')ctx.resume();
+  var bs=ctx.sampleRate*0.5,buf=ctx.createBuffer(1,bs,ctx.sampleRate),data=buf.getChannelData(0);
+  for(var i=0;i<bs;i++)data[i]=(Math.random()*2-1)*(1-i/bs);
+  var ns=ctx.createBufferSource(),f=ctx.createBiquadFilter(),ng=ctx.createGain();
+  ns.buffer=buf;f.type='bandpass';f.frequency.setValueAtTime(250,ctx.currentTime);f.frequency.exponentialRampToValueAtTime(2600,ctx.currentTime+0.4);
+  ng.gain.setValueAtTime(0.2,ctx.currentTime);ng.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.45);
+  ns.connect(f);f.connect(ng);ng.connect(ctx.destination);ns.start();
+  var sub=ctx.createOscillator(),sg=ctx.createGain();
+  sub.type='sine';sub.frequency.setValueAtTime(120,ctx.currentTime);sub.frequency.exponentialRampToValueAtTime(38,ctx.currentTime+0.5);
+  sg.gain.setValueAtTime(0.22,ctx.currentTime);sg.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.55);
+  sub.connect(sg);sg.connect(ctx.destination);sub.start();sub.stop(ctx.currentTime+0.6);
+}
+
+// ─── INTRO SEQUENCE ──────────────────────────────────────────────────────────
+var introTimers=[];
+function runIntroTimeline(){
+  startIntroGlobe();
+  introTimers.push(setTimeout(()=>playRiser(),2500));
+  introTimers.push(setTimeout(()=>{
+    var overlay=document.getElementById('intro');
+    overlay.classList.add('shake');
+    document.getElementById('intro-flash').classList.add('fire');
+    document.getElementById('sw1').classList.add('fire');
+    document.getElementById('sw2').classList.add('fire');
+    document.getElementById('logo-fad').classList.add('fire');
+    document.getElementById('logo-ed').classList.add('fire');
+    playImpact();
+    setTimeout(()=>overlay.classList.remove('shake'),400);
+  },4200));
+  introTimers.push(setTimeout(()=>{
+    document.getElementById('intro').classList.add('exiting');
+  },6800));
+  introTimers.push(setTimeout(()=>{
+    document.getElementById('intro').classList.add('done');
+    if(introGlobe)introGlobe.stop();
+    try{sessionStorage.setItem('faded_intro_played','1')}catch(e){}
+  },7500));
+}
+
+function skipIntro(){
+  playClick();
+  introTimers.forEach(clearTimeout);
+  if(introGlobe)introGlobe.stop();
+  var el=document.getElementById('intro');
+  el.classList.add('exiting');
+  setTimeout(()=>el.classList.add('done'),700);
+  try{sessionStorage.setItem('faded_intro_played','1')}catch(e){}
+}
+window.skipIntro=skipIntro;
+
+// ─── CURSOR ──────────────────────────────────────────────────────────────────
+function initCursor(){
+  var fine=false;try{fine=window.matchMedia('(hover:hover) and (pointer:fine)').matches}catch(e){}
+  if(!fine||typeof gsap==='undefined')return;
+  var dot=document.getElementById('c-dot'),ring=document.getElementById('c-ring');
+  if(!dot||!ring)return;
+  var ready=false;
+  var fb=setTimeout(()=>{if(!ready){dot.style.display='none';ring.style.display='none';document.body.style.cursor='auto';document.documentElement.style.setProperty('cursor','auto','important')}},1500);
+  var dX=gsap.quickTo(dot,'x',{duration:0.12,ease:'power3.out'});
+  var dY=gsap.quickTo(dot,'y',{duration:0.12,ease:'power3.out'});
+  var rX=gsap.quickTo(ring,'x',{duration:0.35,ease:'power3.out'});
+  var rY=gsap.quickTo(ring,'y',{duration:0.35,ease:'power3.out'});
+  window.addEventListener('mousemove',function(e){
+    ready=true;clearTimeout(fb);
+    dX(e.clientX);dY(e.clientY);rX(e.clientX);rY(e.clientY);
+  });
+  document.querySelectorAll('a,button,input[type="range"],[data-tilt]').forEach(function(el){
+    el.addEventListener('mouseenter',function(){gsap.to(ring,{scale:1.8,duration:0.25})});
+    el.addEventListener('mouseleave',function(){gsap.to(ring,{scale:1,duration:0.25})});
+  });
+}
+
+// ─── CARD TILT ───────────────────────────────────────────────────────────────
+function initCardTilt(){
+  document.querySelectorAll('[data-tilt]').forEach(function(el){
+    el.addEventListener('mousemove',function(e){
+      var rect=el.getBoundingClientRect();
+      var px=(e.clientX-rect.left)/rect.width-0.5;
+      var py=(e.clientY-rect.top)/rect.height-0.5;
+      el.style.transform='perspective(1400px) rotateX('+(py*-12)+'deg) rotateY('+(px*16)+'deg) scale(1.03)';
+    });
+    el.addEventListener('mouseleave',function(){
+      el.style.transform='perspective(1400px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
+}
+
+// ─── SCROLL ──────────────────────────────────────────────────────────────────
+var scrollQueued=false;
+function initScroll(){
+  var fill=document.getElementById('scroll-fill');
+  var heroGrid=document.getElementById('hero-grid');
+  var heroBloom=document.getElementById('hero-bloom');
+  var heroCard=document.getElementById('hero-card');
+  var heroCanvas=document.getElementById('hero-canvas');
+  var sectionIds=['audiences','how','why','story','faq'];
+  var navLinks=document.querySelectorAll('.nav-link');
+  var heroEl=document.getElementById('hero');
+
+  window.addEventListener('scroll',function(){
+    if(scrollQueued)return;scrollQueued=true;
+    requestAnimationFrame(function(){
+      scrollQueued=false;
+      var sy=window.scrollY;
+      var max=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+      var prog=max>0?sy/max:0;
+      fill.style.width=(Math.min(100,prog*100))+'%';
+      // parallax
+      if(heroGrid)heroGrid.style.transform='translateY('+(sy*0.15)+'px)';
+      if(heroBloom)heroBloom.style.transform='translateY('+(sy*0.08)+'px)';
+      if(heroCard)heroCard.style.transform='translateY('+(sy*0.08)+'px)';
+      // hero globe morph
+      if(heroCanvas){
+        var heroH=heroEl?heroEl.offsetHeight:window.innerHeight;
+        var hp=Math.max(0,Math.min(1,sy/(heroH*0.9)));
+        var op=Math.max(0,1-hp*1.6);
+        heroCanvas.style.opacity=op;
+        heroCanvas.style.transform='scale('+(1-hp*0.35)+') rotate('+(hp*-18)+'deg)';
+      }
+      // active nav
+      var active=null;
+      sectionIds.forEach(function(id){
+        var el=document.getElementById(id);
+        if(el&&el.getBoundingClientRect().top<=140)active=id;
+      });
+      navLinks.forEach(function(l){
+        var sec=l.getAttribute('data-section');
+        l.classList.toggle('active',sec===active);
+      });
+    });
+  },{passive:true});
+}
+
+// ─── REVEAL ──────────────────────────────────────────────────────────────────
+var statsDone=false;
+function animateStats(){
+  if(statsDone)return;statsDone=true;
+  var start=performance.now(),dur=1100;
+  var barbers=document.querySelector('[data-stat="barbers"]');
+  var flat=document.querySelector('[data-stat="flat"]');
+  function tick(now){
+    var t=Math.min(1,(now-start)/dur);
+    var e=1-Math.pow(1-t,3);
+    if(barbers)barbers.textContent=Math.round(9*e);
+    if(flat)flat.textContent='$'+Math.round(30*e);
+    if(t<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function initReveal(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        if(entry.target.closest('#stats'))animateStats();
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.2});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){io.observe(el)});
+}
+
+// ─── TICKER ──────────────────────────────────────────────────────────────────
+function initTicker(){
+  var lines=document.querySelectorAll('.ticker-line');
+  var idx=0;
+  setInterval(function(){
+    lines[idx].classList.remove('active');
+    idx=(idx+1)%lines.length;
+    lines[idx].classList.add('active');
+  },3200);
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+var openFaq=null;
+function toggleFaq(i){
+  playClick();
+  var items=document.querySelectorAll('.faq-item');
+  if(openFaq===i){items[i].classList.remove('open');openFaq=null;return}
+  if(openFaq!==null)items[openFaq].classList.remove('open');
+  items[i].classList.add('open');openFaq=i;
+}
+window.toggleFaq=toggleFaq;
+
+// ─── PRICING ─────────────────────────────────────────────────────────────────
+function initPricing(){
+  var slider=document.getElementById('cuts-slider');
+  var display=document.getElementById('cuts-display');
+  var costEl=document.getElementById('commission-cost');
+  var savingsEl=document.getElementById('calc-savings');
+  function update(){
+    var cuts=parseInt(slider.value,10);
+    display.textContent=cuts;
+    var cc=Math.round(cuts*45*0.25);
+    costEl.textContent='-$'+cc.toLocaleString()+'/mo';
+    var saved=Math.max(0,cc-30);
+    savingsEl.textContent='You keep $'+saved.toLocaleString()+' more / mo';
+  }
+  slider.addEventListener('input',update);
+  update();
+}
+
+// ─── BARBER TOGGLE ───────────────────────────────────────────────────────────
+var barberOnline=true;
+function toggleBarber(){
+  barberOnline=!barberOnline;
+  var sw=document.getElementById('barber-toggle');
+  var thumb=document.getElementById('toggle-thumb');
+  var status=document.getElementById('barber-status');
+  sw.style.background=barberOnline?'#22C55E':'rgba(255,255,255,0.15)';
+  thumb.style.transform=barberOnline?'translateX(20px)':'translateX(0px)';
+  status.style.color=barberOnline?'#22C55E':'rgba(245,245,240,0.4)';
+  status.textContent=barberOnline?'● Online — clients can find and book you right now.':'○ Offline — hidden from client search.';
+}
+window.toggleBarber=toggleBarber;
+
+// ─── HERO MOUSE GLOW ─────────────────────────────────────────────────────────
+function initHeroGlow(){
+  var hero=document.getElementById('hero');
+  hero.addEventListener('mousemove',function(e){
+    var rect=hero.getBoundingClientRect();
+    var x=((e.clientX-rect.left)/rect.width)*100;
+    var y=((e.clientY-rect.top)/rect.height)*100;
+    hero.style.background='radial-gradient(ellipse 80% 60% at '+x+'% '+y+'%,rgba(59,108,247,0.28),transparent 65%)';
+  });
+  hero.addEventListener('mouseleave',function(){
+    hero.style.background='';
+  });
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('footer-year').textContent=new Date().getFullYear();
+
+  var reduced=false,lowPower=false,played=false;
+  try{reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){}
+  try{lowPower=window.matchMedia('(max-width:480px)').matches||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2)}catch(e){}
+  try{played=sessionStorage.getItem('faded_intro_played')==='1'}catch(e){}
+
+  if(reduced||lowPower||played){
+    document.getElementById('intro').classList.add('done');
+  }else{
+    runIntroTimeline();
   }
 
-  // Muted autoplay is allowed by browsers — start immediately, unmute on first interaction
-  bgAudio.play().catch(() => {});
+  startHeroGlobe();
+  initCursor();
+  initScroll();
+  initReveal();
+  initTicker();
+  initPricing();
+  initCardTilt();
+  initHeroGlow();
 
-  function unmuteOnInteraction() {
-    if (!bgAudio.muted) return;
-    bgAudio.muted = false;
-    if (bgAudio.paused) bgAudio.play().catch(() => {});
-    updateMusicBtn();
-    document.removeEventListener('click', unmuteOnInteraction);
-    document.removeEventListener('keydown', unmuteOnInteraction);
-    document.removeEventListener('touchstart', unmuteOnInteraction);
-    document.removeEventListener('scroll', unmuteOnInteraction);
-    document.removeEventListener('touchmove', unmuteOnInteraction);
-  }
-  document.addEventListener('click', unmuteOnInteraction);
-  document.addEventListener('keydown', unmuteOnInteraction);
-  document.addEventListener('touchstart', unmuteOnInteraction, { passive: true });
-  document.addEventListener('scroll', unmuteOnInteraction, { passive: true });
-  document.addEventListener('touchmove', unmuteOnInteraction, { passive: true });
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    document.body.style.opacity='1';
+  })});
+});
+
+})();
 </script>
-
-<!-- Music toggle button -->
-<button id="music-toggle" onclick="toggleMusic(event)" title="Play music" style="
-  position: fixed;
-  bottom: max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px));
-  right: 20px;
-  z-index: 999;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: rgba(15,15,15,0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #F5F5F0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.55;
-  transition: opacity 0.2s, transform 0.15s;
-" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-</button>
-
 </body>
 </html>

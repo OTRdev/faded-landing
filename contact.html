@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-32.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="Contact FADED — questions, partnership ideas, or just want to say hi.">
+<title>Contact — FADED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;600&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#0C0C10}
+body{background:#0C0C10;color:#F5F5F0;font-family:'DM Sans',sans-serif;min-height:100vh}
+::selection{background:#3B6CF7;color:#fff}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #3B6CF7;outline-offset:3px;border-radius:4px}
+nav{padding:20px 48px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1.5px;text-decoration:none}
+.nav-logo .fad{color:#F5F5F0}.nav-logo .ed{color:#3B6CF7}
+.nav-back{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:rgba(245,245,240,0.6);text-decoration:none;transition:color 0.2s}
+.nav-back:hover{color:#F5F5F0}
+.page{max-width:640px;margin:0 auto;padding:100px 24px 120px}
+.eyebrow{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:#3B6CF7;text-transform:uppercase;text-align:center}
+h1{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(32px,5vw,48px);text-align:center;margin:14px 0 8px}
+.sub{font-family:'DM Sans',sans-serif;font-size:16px;color:rgba(245,245,240,0.55);text-align:center;margin:0 0 48px}
+.success{padding:32px;border-radius:18px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.3);text-align:center;display:none}
+.success.show{display:block}
+.success-h{font-family:'Oswald',sans-serif;font-size:22px;font-weight:600;color:#F5F5F0}
+.success-p{font-family:'DM Sans',sans-serif;font-size:15px;color:rgba(245,245,240,0.6);margin:10px 0 0}
+.success-p a{color:#3B6CF7}
+form{display:flex;flex-direction:column;gap:20px}
+form.hidden{display:none}
+label{display:block;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,245,240,0.5);margin-bottom:8px}
+input,textarea{width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#F5F5F0;font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s ease}
+input::placeholder,textarea::placeholder{color:rgba(245,245,240,0.35)}
+input:focus,textarea:focus{border-color:rgba(59,108,247,0.5)}
+textarea{resize:vertical;min-height:140px}
+.submit-btn{margin-top:10px;padding:16px 32px;background:linear-gradient(135deg,#3B6CF7,#2a52c9);color:#fff;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:16px;cursor:pointer;box-shadow:0 20px 50px -12px rgba(59,108,247,0.55);transition:transform 0.2s ease,box-shadow 0.2s ease}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 28px 60px -10px rgba(59,108,247,0.8)}
+.divider{margin-top:56px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.07);text-align:center}
+.divider p{font-family:'DM Sans',sans-serif;font-size:14px;color:rgba(245,245,240,0.45)}
+.divider a{color:#3B6CF7;text-decoration:none}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="fad">FAD</span><span class="ed">ED</span></a>
+  <a href="index.html" class="nav-back">← Back to site</a>
+</nav>
+<div class="page">
+  <div class="eyebrow">Get In Touch</div>
+  <h1>Talk to FADED.</h1>
+  <p class="sub">Questions, partnership ideas, or just want to say hi — we read everything.</p>
+
+  <div class="success" id="success">
+    <div class="success-h">Your email app should be open now.</div>
+    <p class="success-p">If nothing opened, email us directly at <a href="mailto:hello@letsgetfaded.com">hello@letsgetfaded.com</a>.</p>
+  </div>
+
+  <form id="contact-form" onsubmit="handleSubmit(event)">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required placeholder="Your name">
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="you@example.com">
+    </div>
+    <div>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required placeholder="What's on your mind?" rows="6"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Send Message</button>
+  </form>
+
+  <div class="divider">
+    <p>Prefer email? Reach us directly at <a href="mailto:hello@letsgetfaded.com">hello@letsgetfaded.com</a></p>
+  </div>
+</div>
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  var name=document.getElementById('name').value;
+  var email=document.getElementById('email').value;
+  var message=document.getElementById('message').value;
+  var subject=encodeURIComponent('Message from '+name+' via FADED site');
+  var body=encodeURIComponent(message+'\n\n— '+name+' ('+email+')');
+  window.location.href='mailto:hello@letsgetfaded.com?subject='+subject+'&body='+body;
+  document.getElementById('contact-form').classList.add('hidden');
+  document.getElementById('success').classList.add('show');
+}
+</script>
+</body>
+</html>
