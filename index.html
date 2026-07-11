@@ -1078,7 +1078,7 @@ function animateStats(){
   function tick(now){
     var t=Math.min(1,(now-start)/dur);
     var e=1-Math.pow(1-t,3);
-    if(barbers)barbers.textContent=Math.round(9*e);
+    if(barbers)barbers.textContent=Math.round(13*e);
     if(flat)flat.textContent='$'+Math.round(30*e);
     if(t<1)requestAnimationFrame(tick);
   }
