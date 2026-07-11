@@ -1,20 +1,42 @@
 # FADED
 
-> FADED is a real-time barber booking platform in Canada. Clients find an available barber nearby and book a cut in seconds — no phone calls, no DMs, no waiting. Barbers pay a flat $30/month platform fee instead of a per-cut commission, and keep 100% of what they charge.
+> FADED is a real-time, three-sided barber booking marketplace live across Canada (clients, independent barbers, and shop owners). Clients see who's genuinely available nearby on a live map and book in seconds — no calls, no DMs, no waiting. Barbers pay one flat $30/month platform fee and keep 100% of what they charge, with zero commission on any booking. FADED launched June 24, 2026.
+
+## Who it's for
+
+- **Clients**: find and book an available barber nearby in real time, see real prices and reviews upfront.
+- **Independent barbers**: go online/offline on their own schedule, set their own prices, keep 100% of earnings.
+- **Shop owners**: run booth rental listings and manage walk-in queues, schedules, and daily revenue across their shop.
+
+## Core differentiators
+
+- **GPS live discovery**: barbers appear on a live map the moment they go online — not a static directory, not DMs, not phone tag.
+- **Zero commission, flat pricing**: barbers pay a flat $30/month platform fee instead of the 20–30% per-cut commission charged by most competitors. FADED takes $0 of what a barber earns per cut.
+- **Canadian tax tools**: FADED auto-calculates the correct HST/GST/QST/PST by province on transactions and gives barbers a private view of their earnings against the CRA's $30,000 small-supplier registration threshold, warning them before registration becomes mandatory. This is a private earnings-tracking tool for the barber's own use — FADED does not report earnings to the CRA or any tax authority.
+- **Booth rental marketplace**: shop owners can list and manage booth/chair rentals to independent barbers directly through the platform.
+- **Canada-wide from day one**: FADED was built and launched nationwide, not as a single-city pilot. Founding barbers are currently concentrated in Ontario as the network grows, but the platform and pricing are the same in every province.
+
+## How FADED differs from Booksy, Fresha, theCut, and SQUIRE
+
+Those platforms are general-purpose, commission-based booking tools built primarily for the U.S. market. FADED is purpose-built for Canadian barbers: flat-fee pricing instead of commission, built-in multi-province Canadian tax calculation and CRA threshold tracking, and a booth rental marketplace for shop owners — none of which the competitors above offer.
 
 ## Key facts
 
-- Coverage: all of Canada, founding barbers currently live in Ontario, expanding coast to coast.
-- Pricing for barbers: flat $30/month, no commission on bookings. First 20 barbers get 2 months free; every barber after gets 1 month free.
-- Pricing for clients: the listed price set by the barber, plus a small FADED fee and standard payment processing. First month is fee-free for new clients.
+- Launch date: June 24, 2026.
+- Coverage: all of Canada; founding barbers currently live in Ontario, expanding coast to coast.
+- Pricing for barbers: flat $30/month, zero commission. First 20 barbers get 2 months free; every barber after gets 1 month free.
+- Pricing for clients: the price set by the barber, plus a small FADED fee and standard payment processing. First month is fee-free for new clients.
 - Payments: processed via Stripe.
 - Barber verification: every barber is verified before appearing on the platform; licensed barbers can display a "Licensed Barber" badge.
 - Cancellations: clients can cancel or reschedule in-app with reasonable notice; repeated no-shows are tracked.
+- Founder: Kunal Kumar.
+- Instagram: https://www.instagram.com/getfaded.app
+- LinkedIn: https://www.linkedin.com/company/62418415
 
 ## Pages
 
-- [Home](https://www.letsgetfaded.com/): overview, how it works, pricing comparison, FAQ.
+- [Home](https://www.letsgetfaded.com/): overview, how it works, pricing comparison, tax tools, FAQ.
 - [Contact](https://www.letsgetfaded.com/contact.html)
 - [Privacy Policy](https://www.letsgetfaded.com/privacy.html)
-- [Terms of Service](https://www.letsgetfaded.com/terms.html)
+- [Terms of Service](https://www.letsgetfaded.com/terms.html): includes booth rental terms for shop owners.
 - [App](https://app.letsgetfaded.com/): the booking app itself (requires an account).
