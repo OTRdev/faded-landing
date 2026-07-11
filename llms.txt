@@ -1,0 +1,20 @@
+# FADED
+
+> FADED is a real-time barber booking platform in Canada. Clients find an available barber nearby and book a cut in seconds — no phone calls, no DMs, no waiting. Barbers pay a flat $30/month platform fee instead of a per-cut commission, and keep 100% of what they charge.
+
+## Key facts
+
+- Coverage: all of Canada, founding barbers currently live in Ontario, expanding coast to coast.
+- Pricing for barbers: flat $30/month, no commission on bookings. First 20 barbers get 2 months free; every barber after gets 1 month free.
+- Pricing for clients: the listed price set by the barber, plus a small FADED fee and standard payment processing. First month is fee-free for new clients.
+- Payments: processed via Stripe.
+- Barber verification: every barber is verified before appearing on the platform; licensed barbers can display a "Licensed Barber" badge.
+- Cancellations: clients can cancel or reschedule in-app with reasonable notice; repeated no-shows are tracked.
+
+## Pages
+
+- [Home](https://www.letsgetfaded.com/): overview, how it works, pricing comparison, FAQ.
+- [Contact](https://www.letsgetfaded.com/contact.html)
+- [Privacy Policy](https://www.letsgetfaded.com/privacy.html)
+- [Terms of Service](https://www.letsgetfaded.com/terms.html)
+- [App](https://app.letsgetfaded.com/): the booking app itself (requires an account).
