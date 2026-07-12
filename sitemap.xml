@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.letsgetfaded.com/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-07-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.letsgetfaded.com/assets/mock_client.webp</image:loc>
+      <image:title>FADED client app screenshot</image:title>
+      <image:caption>FADED app screenshot showing the live map of available barbers nearby with real prices and reviews</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.letsgetfaded.com/assets/mock_barber.webp</image:loc>
+      <image:title>FADED barber app screenshot</image:title>
+      <image:caption>FADED barber dashboard showing online status toggle, pricing, and booking schedule</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.letsgetfaded.com/assets/mock_shop.webp</image:loc>
+      <image:title>FADED shop owner app screenshot</image:title>
+      <image:caption>FADED shop owner dashboard showing walk-in queue, booth rental listings, and daily revenue tracking</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.letsgetfaded.com/og-image.png</image:loc>
+      <image:title>FADED — Find Your Barber Right Now</image:title>
+      <image:caption>FADED barber booking app logo and tagline</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.letsgetfaded.com/contact.html</loc>
