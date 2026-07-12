@@ -467,7 +467,7 @@ footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,2
   <div class="stat-card reveal" data-reveal>
     <div class="stat-val" style="color:#F5F5F0" data-stat="barbers">0</div>
     <div class="stat-label">Founding Barbers</div>
-    <div class="stat-sub">Live now, growing every week</div>
+    <div class="stat-sub">Onboarded so far, growing every week</div>
   </div>
   <div class="stat-card reveal" data-reveal>
     <div class="stat-val" style="color:#3B6CF7" data-stat="commission">$0</div>
@@ -1073,6 +1073,21 @@ function initScroll(){
 
 // ─── REVEAL ──────────────────────────────────────────────────────────────────
 var statsDone=false;
+// Live count of real, onboarding-complete, non-test barbers -- fetched once on
+// page load so the "Founding Barbers" stat never drifts from reality again.
+var liveBarberCount=13; // fallback only, used if the fetch below fails
+fetch('https://qyjwfyboyijqiovtagby.supabase.co/rest/v1/barbers?select=id&approved=eq.true&handle=not.is.null&or=(is_test.is.null,is_test.eq.false)',{
+  method:'HEAD',
+  headers:{
+    'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5andmeWJveWlqcWlvdnRhZ2J5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5Njg0ODksImV4cCI6MjA5MjU0NDQ4OX0.jl4TiGzfF9cwEYJeqxXP8FbP6hHi6qL3aDuC9zBMJKs',
+    'Prefer':'count=exact'
+  }
+}).then(function(res){
+  var range=res.headers.get('content-range');
+  var total=range?parseInt(range.split('/')[1],10):NaN;
+  if(!isNaN(total)&&total>0)liveBarberCount=total;
+}).catch(function(){});
+
 function animateStats(){
   if(statsDone)return;statsDone=true;
   var start=performance.now(),dur=1100;
@@ -1081,7 +1096,7 @@ function animateStats(){
   function tick(now){
     var t=Math.min(1,(now-start)/dur);
     var e=1-Math.pow(1-t,3);
-    if(barbers)barbers.textContent=Math.round(13*e);
+    if(barbers)barbers.textContent=Math.round(liveBarberCount*e);
     if(flat)flat.textContent='$'+Math.round(30*e);
     if(t<1)requestAnimationFrame(tick);
   }
