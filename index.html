@@ -23,7 +23,10 @@
 <title>FADED — Find Your Barber Right Now</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Non-render-blocking font load: fetch in the background, swap in once ready -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html.custom-cursor *{cursor:none}
@@ -494,7 +497,7 @@ footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,2
         <h3 class="persona-h3">Find your barber. Right now.</h3>
         <p class="persona-p">See who's actually free nearby, real prices, real reviews — book in seconds.</p>
         <div class="mockup-wrap">
-          <img src="assets/mock_client.png" alt="FADED client view" loading="lazy">
+          <img src="assets/mock_client.webp" alt="FADED client view" loading="lazy">
           <div class="mockup-notch"></div>
         </div>
       </div>
@@ -506,7 +509,7 @@ footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,2
         <h3 class="persona-h3">Your chair. Your rules.</h3>
         <p class="persona-p">Go online instantly, set your own price, and keep 100% of every cut.</p>
         <div class="mockup-wrap">
-          <img src="assets/mock_barber.png" alt="FADED barber view" loading="lazy">
+          <img src="assets/mock_barber.webp" alt="FADED barber view" loading="lazy">
           <div class="mockup-notch"></div>
         </div>
         <div class="barber-toggle-wrap">
@@ -527,7 +530,7 @@ footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,2
         <h3 class="persona-h3">Every cut, every day, tracked.</h3>
         <p class="persona-p">Walk-in queues, schedules, and daily revenue — all in one dashboard. List open booths for rent and manage every barber in your shop from the same place.</p>
         <div class="mockup-wrap">
-          <img src="assets/mock_shop.png" alt="FADED shop owner view" loading="lazy">
+          <img src="assets/mock_shop.webp" alt="FADED shop owner view" loading="lazy">
           <div class="mockup-notch"></div>
         </div>
       </div>
