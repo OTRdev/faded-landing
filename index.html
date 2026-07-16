@@ -468,7 +468,9 @@ footer{padding:80px 24px 40px;background:#08080b;border-top:1px solid rgba(255,2
       <div class="ticker-wrap">
         <div class="ticker-line active" data-ticker="0"><span class="ticker-dot" style="background:#22C55E"></span>Devon just went live in Belleville</div>
         <div class="ticker-line" data-ticker="1"><span class="ticker-dot" style="background:#3B6CF7"></span>Marcus booked in Toronto — 2 min ago</div>
-        <div class="ticker-line" data-ticker="2"><span class="ticker-dot" style="background:#22C55E"></span>Priya just went live in Ottawa</div>
+        <div class="ticker-line" data-ticker="2"><span class="ticker-dot" style="background:#22C55E"></span>Maya just went live in Ottawa</div>
+        <div class="ticker-line" data-ticker="3"><span class="ticker-dot" style="background:#3B6CF7"></span>Aaliyah booked in Vancouver — 5 min ago</div>
+        <div class="ticker-line" data-ticker="4"><span class="ticker-dot" style="background:#22C55E"></span>Jordan just went live in Calgary</div>
       </div>
     </div>
     <div class="hero-right" id="hero-card">
@@ -813,7 +815,7 @@ function startIntroGlobe(){
   var nodes=[];for(var i=0;i<NC;i++)nodes.push(sph((Math.random()*140-70),(Math.random()*360)));
   var arcs=[];for(var i2=0;i2<14;i2++){var a=Math.floor(Math.random()*NC),b=Math.floor(Math.random()*NC);if(a!==b)arcs.push({a,b,phase:Math.random()*Math.PI*2,speed:0.6+Math.random()*0.8})}
 
-  var pingNames=['Marcus — Toronto','Priya — Ottawa','Devon — Belleville'];
+  var pingNames=['Marcus — Toronto','Maya — Ottawa','Devon — Belleville','Aaliyah — Vancouver','Jordan — Calgary'];
   var usedNodes=[];
   var pings=[0.3,1.6,2.9].map((start,i)=>{
     var idx;do{idx=Math.floor(Math.random()*NC)}while(usedNodes.indexOf(idx)!==-1);
