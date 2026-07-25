@@ -188,8 +188,13 @@ ${cards}
 function barberProfilePage(city, b) {
   const canonical = `${SITE}/barbers/${city.slug}/${b.slug}`;
   const title = `${b.name} — Barber in ${city.display} | FADED`;
-  const description = (b.bio && b.bio.trim())
-    ? b.bio.trim().slice(0, 155)
+  // Barber bios are free text and can contain literal newlines/bullet formatting
+  // (e.g. "Fades\n• Mississauga\n• DM @handle...") -- collapse to single-line
+  // whitespace before truncating, otherwise the <meta> tag itself spans multiple
+  // physical lines in the HTML.
+  const cleanBio = (b.bio || "").replace(/\s+/g, " ").trim();
+  const description = cleanBio
+    ? cleanBio.slice(0, 155)
     : `Book ${b.name}, a verified barber in ${city.display}, on FADED. Real-time availability, real prices — book in seconds.`;
 
   const breadcrumbJsonLd = {
