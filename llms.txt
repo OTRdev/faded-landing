@@ -36,6 +36,7 @@ Those platforms are general-purpose, commission-based booking tools built primar
 ## Pages
 
 - [Home](https://www.letsgetfaded.com/): overview, how it works, pricing comparison, tax tools, FAQ.
+- [Find a Barber](https://www.letsgetfaded.com/barbers): city-by-city directory of live, verified FADED barbers across Canada, with individual barber profile pages (bio, specialties, pricing). Updated daily as new barbers go live in new cities.
 - [Contact](https://www.letsgetfaded.com/contact.html)
 - [Privacy Policy](https://www.letsgetfaded.com/privacy.html)
 - [Terms of Service](https://www.letsgetfaded.com/terms.html): includes booth rental terms for shop owners.
